@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <title>IPC MASTER-VORLAGE Cockpit</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Exaktes Styling für die interne IPC MASTER-VORLAGE */
+        body { background-color: #f4f4f4; display: flex; justify-content: center; padding: 20px; margin: 0; font-family: Arial, sans-serif; }
+        .a4-page-landscape { background: #fff; width: 100%; max-width: 1120px; min-height: 790px; padding: 30px; box-sizing: border-box; box-shadow: 0 4px 8px rgba(0,0,0,0.1); border: 1px solid #ccc; font-size: 9px; color: #000; }
+        
+        .header-container { display: flex; justify-content: space-between; align-items: flex-end; border-bottom: 2px solid #e30613; padding-bottom: 10px; margin-bottom: 15px; }
+        .header-title { font-size: 24px; font-weight: bold; color: #e30613; margin: 0; letter-spacing: -1px; }
+        
+        .ipc-master-table { width: 100%; border-collapse: collapse; text-align: center; margin-bottom: 15px; }
+        .ipc-master-table th { border: 1px solid #000; font-size: 7px; font-weight: normal; padding: 4px 2px; vertical-align: bottom; background: #fff; }
+        .ipc-master-table td { border: 1px solid #000; padding: 2px; vertical-align: middle; height: 22px; }
+        .ipc-master-table .no-border { border: none !important; font-weight: bold; font-size: 12px; width: 15px; }
+        
+        .master-input { width: 95%; border: none; text-align: center; font-size: 10px; font-family: inherit; background: transparent; outline: none; }
+        .master-input-bold { font-weight: bold; background: #f0f8ff; }
+        
+        .math-symbol { font-weight: bold; font-size: 12px; padding: 0 4px; }
+        
+        .job-table { width: 100%; border-collapse: collapse; text-align: center; margin-bottom: 15px; }
+        .job-table th, .job-table td { border: 1px solid #000; padding: 4px; }
+        
+        .footer-section { display: flex; justify-content: space-between; margin-top: 20px; font-size: 10px; }
+        .footer-box { border-bottom: 1px solid #000; padding-bottom: 2px; display: inline-block; }
+    </style>
+</head>
+<body>
+
+    <!-- INTERNER MASTER KALKULATOR (Querformat/Breit) -->
+    <div class="a4-page-landscape" id="page-ipc-master">
+        
+        <!-- Header -->
+        <div class="header-container">
+            <h1 class="header-title">Kalkulation</h1>
+            <div style="text-align: right; line-height: 1;">
+                <span style="font-size: 24px; font-weight: bold; color: #e30613;">Rentokil</span><br>
+                <span style="font-size: 10px; color: #333;">Die Schädlingsexperten</span>
+            </div>
+        </div>
+        <div style="font-weight:bold; font-size:10px; margin-bottom: 15px;">Vertrag: (Bei PestConnect-Kalkulator als Kalkulation nutzen)</div>
+
+        <!-- HAUPT-MATRIX -->
+        <table class="ipc-master-table">
+            <tr>
+                <th style="width: 12%; font-weight:bold; font-size:10px; vertical-align:middle;">Schädling</th>
+                <th class="no-border"></th>
+                <th style="width: 6%;">Minuten<br>pro Station</th>
+                <th class="no-border"></th>
+                <th style="width: 8%;">Zeit in Minuten<br>pro Behandlung</th>
+                <th class="no-border"></th>
+                <th style="width: 9%;">Wert in € pro<br>Behandlung</th>
+                <th class="no-border"></th>
+                <th style="width: 8%;">Anzahl im Jahr<br>Behandlungen</th>
+                <th class="no-border"></th>
+                <th style="width: 8%;">Anzahl<br>Sachverständigen<br>inspektion</th>
+                <th class="no-border"></th>
+                <th style="width: 6%;">Anzahl<br>Stationen</th>
+                <th class="no-border"></th>
+                <th style="width: 10%;">Wert in €<br>pro Jahr</th>
+                <th style="width: 12%;">Angebotswert<br>in € pro Jahr</th>
+            </tr>
+
+            <!-- 8 Dynamische Reihen nach Vorgabe -->
+            <!-- Reihe 1 -->
+            <tr>
+                <td><input type="text" class="master-input" style="font-weight:bold;"></td>
+                <td class="no-border">X</td>
+                <td><input type="number" class="master-input" value="0"></td>
+                <td class="no-border">X</td>
+                <td><input type="number" class="master-input" value="0"></td>
+                <td class="no-border">=</td>
+                <td><input type="text" class="master-input" value="0,00 €"></td>
+                <td class="no-border">X</td>
+                <td><input type="number" class="master-input" value="0"></td>
+                <td class="no-border">+</td>
+                <td><input type="number" class="master-input"></td>
+                <td class="no-border">X</td>
+                <td><input type="number" class="master-input"></td>
+                <td class="no-border">=</td>
+                <td><input type="text" class="master-input" value="0,00 €" readonly></td>
+                <td><input type="text" class="master-input master-input-bold" value="0,00 €"></td>
+            </tr>
+            <!-- Reihe 2 -->
+            <tr>
+                <td><input type="text" class="master-input" style="font-weight:bold;"></td>
+                <td class="no-border">X</td>
+                <td><input type="number" class="master-input" value="0"></td>
+                <td class="no-border">X</td>
+                <td><input type="number" class="master-input" value="0"></td>
+                <td class="no-border">=</td>
+                <td><input type="text" class="master-input" value="0,00 €"></td>
+                <td class="no-border">X</td>
+                <td><input type="number" class="master-input" value="0"></td>
+                <td class="no-border">+</td>
+                <td><input type="number" class="master-input"></td>
+                <td class="no-border">X</td>
+                <td><input type="number" class="master-input"></td>
+                <td class="no-border">=</td>
+                <td><input type="text" class="master-input" value="0,00 €" readonly></td>
+                <td><input type="text" class="master-input master-input-bold" value="0,00 €"></td>
+            </tr>
+            <!-- Reihe 3 -->
+            <tr>
+                <td><input type="text" class="master-input" style="font-weight:bold;"></td>
+                <td class="no-border">X</td>
+                <td><input type="number" class="master-input" value="0"></td>
+                <td class="no-border">X</td>
+                <td><input type="number" class="master-input" value="0"></td>
+                <td class="no-border">=</td>
+                <td><input type="text" class="master-input" value="0,00 €"></td>
+                <td class="no-border">X</td>
+                <td><input type="number" class="master-input" value="0"></td>
+                <td class="no-border">+</td>
+                <td><input type="number" class="master-input"></td>
+                <td class="no-border">X</td>
+                <td><input type="number" class="master-input"></td>
+                <td class="no-border">=</td>
+                <td><input type="text" class="master-input" value="0,00 €" readonly></td>
+                <td><input type="text" class="master-input master-input-bold" value="0,00 €"></td>
+            </tr>
+            <!-- Reihe 4 -->
+            <tr>
+                <td><input type="text" class="master-input" style="font-weight:bold;"></td>
+                <td class="no-border">X</td>
+                <td><input type="number" class="master-input" value="0"></td>
+                <td class="no-border">X</td>
+                <td><input type="number" class="master-input" value="0"></td>
+                <td class="no-border">=</td>
+                <td><input type="text" class="master-input" value="0,00 €"></td>
+                <td class="no-border">X</td>
+                <td><input type="number" class="master-input" value="0"></td>
+                <td class="no-border">+</td>
+                <td><input type="number" class="master-input"></td>
+                <td class="no-border">X</td>
+                <td><input type="number" class="master-input"></td>
+                <td class="no-border">=</td>
+                <td><input type="text" class="master-input" value="0,00 €" readonly></td>
+                <td><input type="text" class="master-input master-input-bold" value="0,00 €"></td>
+            </tr>
+            <!-- Reihe 5 -->
+            <tr>
+                <td><input type="text" class="master-input" style="font-weight:bold;"></td>
+                <td class="no-border">X</td>
+                <td><input type="number" class="master-input" value="0"></td>
+                <td class="no-border">X</td>
+                <td><input type="number" class="master-input" value="0"></td>
+                <td class="no-border">=</td>
+                <td><input type="text" class="master-input" value="0,00 €"></td>
+                <td class="no-border">X</td>
+                <td><input type="number" class="master-input" value="0"></td>
+                <td class="no-border">+</td>
+                <td><input type="number" class="master-input"></td>
+                <td class="no-border">X</td>
+                <td><input type="number" class="master-input"></td>
+                <td class="no-border">=</td>
+                <td><input type="text" class="master-input" value="0,00 €" readonly></td>
+                <td><input type="text" class="master-input master-input-bold" value="0,00 €"></td>
+            </tr>
+            <!-- Reihe 6 (PestConnect Dummy) -->
+            <tr>
+                <td style="font-weight:bold; font-size:10px;">PestConnect</td>
+                <td class="no-border">X</td>
+                <td><input type="number" class="master-input" value="0"></td>
+                <td class="no-border">X</td>
+                <td><input type="number" class="master-input" value="0"></td>
+                <td class="no-border">=</td>
+                <td><input type="text" class="master-input" value="0,00 €"></td>
+                <td class="no-border">X</td>
+                <td><input type="number" class="master-input" value="0"></td>
+                <td class="no-border">+</td>
+                <td><input type="number" class="master-input"></td>
+                <td class="no-border">X</td>
+                <td><input type="number" class="master-input"></td>
+                <td class="no-border">=</td>
+                <td><input type="text" class="master-input" value="0,00 €" readonly></td>
+                <td><input type="text" class="master-input master-input-bold" value="0,00 €"></td>
+            </tr>
+            <!-- Reihe 7 (PestConnect Dummy) -->
+            <tr>
+                <td style="font-weight:bold; font-size:10px;">PestConnect</td>
+                <td class="no-border">X</td>
+                <td><input type="number" class="master-input" value="0"></td>
+                <td class="no-border">X</td>
+                <td><input type="number" class="master-input" value="0"></td>
+                <td class="no-border">=</td>
+                <td><input type="text" class="master-input" value="0,00 €"></td>
+                <td class="no-border">X</td>
+                <td><input type="number" class="master-input" value="0"></td>
+                <td class="no-border">+</td>
+                <td><input type="number" class="master-input"></td>
+                <td class="no-border">X</td>
+                <td><input type="number" class="master-input"></td>
+                <td class="no-border">=</td>
+                <td><input type="text" class="master-input" value="0,00 €" readonly></td>
+                <td><input type="text" class="master-input master-input-bold" value="0,00 €"></td>
+            </tr>
+        </table>
+
+        <!-- ZUSCHLÄGE & SYSTEMEINRICHTUNG (Exaktes Layout) -->
+        <table style="width:100%; border:none; margin-bottom:15px; font-size:10px;">
+            <tr>
+                <td style="width:30%; border:none;"></td>
+                <td style="width:20%; border:none; text-align:right; padding-right:10px;">
+                    <div style="border:1px solid #000; padding:2px; display:inline-block; margin-bottom:2px; width:100px; text-align:left;">
+                        Sonderzeiten berücksichtigen
+                    </div>
+                </td>
+                <td style="width:10%; border:none;">
+                    <div style="border:1px solid #000; padding:2px; margin-bottom:2px;"><input type="text" class="master-input" style="width:20px;"> + 50 % Z1</div>
+                    <div style="border:1px solid #000; padding:2px;"><input type="text" class="master-input" style="width:20px;"> + 100 % Z2</div>
+                </td>
+                <td style="width:10%; border:none; text-align:right; font-weight:bold; font-size:12px;">TOTAL</td>
+                <td style="width:5%; border:none; text-align:center; font-weight:bold; font-size:12px;">=</td>
+                <td style="width:12%; border:1px solid #000;"><input type="text" class="master-input" value="0,00 €" readonly></td>
+                <td style="width:5%; border:none; text-align:center; font-weight:bold; font-size:12px;">=</td>
+                <td style="width:12%; border:1px solid #000;"><input type="text" class="master-input master-input-bold" value="0,00 €"></td>
+            </tr>
+            <tr>
+                <td colspan="3" style="border:none;"></td>
+                <td style="text-align:right; font-weight:bold; font-size:12px; padding-top:10px;">+</td>
+                <td colspan="2" style="border:1px solid #000; margin-top:10px;">
+                    <div style="display:flex; justify-content:space-between; align-items:center;">
+                        <span>Systemeinrichtung</span>
+                        <input type="text" class="master-input" style="width:30px; border-bottom:1px solid #000;" value="20">
+                        <span>% vom Jahreswert</span>
+                    </div>
+                </td>
+                <td style="border:none; text-align:center; font-weight:bold; font-size:12px; padding-top:10px;">=</td>
+                <td style="border:1px solid #000; padding-top:10px;"><input type="text" class="master-input master-input-bold" value="0,00 €"></td>
+            </tr>
+        </table>
+
+        <!-- JOBS MATRIX -->
+        <table class="job-table">
+            <tr>
+                <th style="width:15%;">BASIS</th>
+                <th style="width:5%;">Z1</th>
+                <th style="width:5%;">Z2</th>
+                <th style="width:15%;">Zeit in €</th>
+                <th style="width:15%;">Präparate</th>
+                <th style="width:15%;">Zwischensumme</th>
+                <th style="width:15%;">Behandlungen</th>
+                <th style="width:15%;">Gesamt €</th>
+            </tr>
+            <tr>
+                <td><input type="text" class="master-input"></td>
+                <td><input type="text" class="master-input"></td>
+                <td><input type="text" class="master-input"></td>
+                <td><div style="display:flex; align-items:center;">+ <input type="text" class="master-input" value=""></div></td>
+                <td><div style="display:flex; align-items:center;">+ <input type="text" class="master-input" value=""></div></td>
+                <td><div style="display:flex; align-items:center;">= <input type="text" class="master-input" value="" readonly></div></td>
+                <td><div style="display:flex; align-items:center;">x <input type="text" class="master-input" value=""></div></td>
+                <td><div style="display:flex; align-items:center;">= <input type="text" class="master-input" value=""></div></td>
+            </tr>
+            <tr>
+                <td><input type="text" class="master-input"></td>
+                <td><input type="text" class="master-input"></td>
+                <td><input type="text" class="master-input"></td>
+                <td><div style="display:flex; align-items:center;">+ <input type="text" class="master-input" value=""></div></td>
+                <td><div style="display:flex; align-items:center;">+ <input type="text" class="master-input" value=""></div></td>
+                <td><div style="display:flex; align-items:center;">= <input type="text" class="master-input" value="" readonly></div></td>
+                <td><div style="display:flex; align-items:center;">x <input type="text" class="master-input" value=""></div></td>
+                <td><div style="display:flex; align-items:center;">= <input type="text" class="master-input" value=""></div></td>
+            </tr>
+            <tr>
+                <td><input type="text" class="master-input"></td>
+                <td><input type="text" class="master-input"></td>
+                <td><input type="text" class="master-input"></td>
+                <td><div style="display:flex; align-items:center;">+ <input type="text" class="master-input" value=""></div></td>
+                <td><div style="display:flex; align-items:center;">+ <input type="text" class="master-input" value=""></div></td>
+                <td><div style="display:flex; align-items:center;">= <input type="text" class="master-input" value="" readonly></div></td>
+                <td><div style="display:flex; align-items:center;">x <input type="text" class="master-input" value=""></div></td>
+                <td><div style="display:flex; align-items:center;">= <input type="text" class="master-input" value=""></div></td>
+            </tr>
+        </table>
+
+        <!-- TOTALS & ZUSATZ -->
+        <table style="width:100%; border:none; margin-bottom:20px; font-size:10px;">
+            <tr>
+                <td style="width:30%;">
+                    <table style="border-collapse:collapse; width:100%;">
+                        <tr>
+                            <td style="border:1px solid #000; padding:2px;">WERT</td>
+                            <td style="border:1px solid #000; padding:2px;">%</td>
+                            <td style="border:1px solid #000; padding:2px;">ANGEBOT</td>
+                        </tr>
+                        <tr>
+                            <td style="border:1px solid #000; padding:2px;"><div style="display:flex; align-items:center;">+ <input type="text" class="master-input"></div></td>
+                            <td style="border:1px solid #000; padding:2px;"><div style="display:flex; align-items:center;">+ <input type="text" class="master-input"></div></td>
+                            <td style="border:1px solid #000; padding:2px;"><input type="text" class="master-input"></td>
+                        </tr>
+                    </table>
+                </td>
+                <td style="width:10%;"></td>
+                <td style="width:60%; text-align:right;">
+                    <div style="display:flex; justify-content:flex-end; align-items:center; margin-bottom:5px;">
+                        <span style="font-weight:bold; margin-right:10px;">+ PestConnect-Bereitstellungspauschale [CBSP] =</span>
+                        <div style="border:1px solid #000; width:100px; padding:2px;"><input type="text" class="master-input" value=""></div>
+                    </div>
+                    <div style="display:flex; justify-content:flex-end; align-items:center; margin-bottom:10px;">
+                        <span style="font-weight:bold; margin-right:10px;">+ Produktverkauf =</span>
+                        <div style="border:1px solid #000; width:100px; padding:2px;"><input type="text" class="master-input" value=""></div>
+                    </div>
+                    <div style="display:flex; justify-content:flex-end; align-items:center;">
+                        <span style="font-weight:bold; font-size:14px; margin-right:10px;">TOTAL =</span>
+                        <div style="border:2px solid #000; width:100px; padding:4px;"><input type="text" class="master-input master-input-bold" style="font-size:14px;" value="0,00 €"></div>
+                    </div>
+                </td>
+            </tr>
+        </table>
+
+        <!-- FUSSTEIL: Begründung, Unterschriften, Projektinfos -->
+        <div style="font-size:10px; margin-bottom: 25px;">
+            <div style="margin-bottom:2px;">Begründung für Abweichungen (Jahreswert bzw. Systemeinrichtungen)</div>
+            <input type="text" style="width:100%; border:1px solid #000; padding:4px; box-sizing:border-box;">
+        </div>
+
+        <div style="display:flex; justify-content:flex-end; align-items:center; margin-bottom:30px;">
+            <div style="font-weight:bold; font-size:12px; margin-right:10px;">Personal-Nr.:</div>
+            <div style="border:2px solid #000; padding:4px; width:120px; text-align:center; font-size:16px; font-weight:bold;">907757</div>
+        </div>
+
+        <div style="display:flex; justify-content:space-between; margin-bottom:25px;">
+            <div style="width:45%;">
+                <div style="border-bottom:1px solid #000; padding-bottom:2px; font-size:9px;">Datum / Unterschrift Regionaler Verkaufsleiter</div>
+                <div style="height:40px;"></div>
+            </div>
+            <div style="width:45%;">
+                <div style="border-bottom:1px solid #000; padding-bottom:2px; font-size:9px;">Unterschrift Verkäufer</div>
+                <div style="height:40px; border-bottom:1px solid #000;"></div>
+            </div>
+        </div>
+
+        <table style="width:100%; border-collapse:collapse; text-align:center; font-size:9px;">
+            <tr>
+                <td style="border:1px solid #000; padding:4px; text-align:left;">Anfragenummer</td>
+                <td style="border:1px solid #000; padding:4px; text-align:left;">Geschäftsart</td>
+                <td style="border:1px solid #000; padding:4px;">Anfrage</td>
+                <td style="border:1px solid #000; padding:4px;">Neu</td>
+                <td style="border:1px solid #000; padding:4px;">Sonstige</td>
+                <td style="border:1px solid #000; padding:4px;">Empfehlung</td>
+                <td style="border:1px solid #000; padding:4px; text-align:left;">Name Empfehlungsgeber</td>
+            </tr>
+            <tr>
+                <td style="border:1px solid #000; padding:4px; height:15px;"><input type="text" class="master-input"></td>
+                <td style="border:1px solid #000; padding:4px; height:15px;"></td>
+                <td style="border:1px solid #000; padding:4px; height:15px;"><input type="text" class="master-input"></td>
+                <td style="border:1px solid #000; padding:4px; height:15px;"><input type="text" class="master-input"></td>
+                <td style="border:1px solid #000; padding:4px; height:15px;"><input type="text" class="master-input"></td>
+                <td style="border:1px solid #000; padding:4px; height:15px;"><input type="text" class="master-input"></td>
+                <td style="border:1px solid #000; padding:4px; height:15px;"><input type="text" class="master-input"></td>
+            </tr>
+        </table>
+
+    </div>
+
+</body>
+</html>

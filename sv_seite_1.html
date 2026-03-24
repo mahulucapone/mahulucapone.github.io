@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <title>Servicevereinbarung - Seite 1</title>
+    <style>
+        /* A4 Layout für sauberen iFrame-Druck - STRIKT GEGEN STAUCHUNG */
+        body { 
+            margin: 0; 
+            padding: 0;
+            font-family: Arial, sans-serif; 
+            background: transparent; 
+            box-sizing: border-box; 
+            overflow: hidden; 
+        }
+        
+        .a4-container { 
+            width: 820px; 
+            height: 1160px; 
+            padding: 40px 45px; 
+            box-sizing: border-box; 
+            font-size: 9px; 
+            line-height: 1.3; 
+            color: #000; 
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .content-wrapper {
+            flex-grow: 1; /* Verteilt den Inhalt sauber bis zum Footer */
+        }
+
+        /* Header Bereich */
+        .sv-header-container { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 10px; border-bottom: 2px solid #e30613; padding-bottom: 5px; }
+        .header-title { color: #e30613; font-size: 22px; font-weight: bold; margin: 0; }
+        .sv-logo { text-align: right; color: #e30613; font-size: 24px; font-weight: bold; line-height: 0.9; letter-spacing: -1px; }
+        .sv-logo span { display: block; font-size: 8px; color: #333; font-weight: normal; letter-spacing: 0; margin-top: 2px;}
+        
+        /* Spalten-Layout */
+        .col-container { display: flex; justify-content: space-between; gap: 20px; }
+        .col-left, .col-right { width: 48%; }
+
+        .section-title { font-weight: bold; color: #e30613; font-size: 10px; margin: 12px 0 4px 0; }
+        .dotted-input { border: none; border-bottom: 1px dotted #000; font-size: 9px; outline: none; background: transparent; font-family: inherit; width: 100%; margin-bottom: 2px;}
+        .row { display: flex; align-items: flex-end; margin-bottom: 6px; width: 100%; }
+        .row label { white-space: nowrap; margin-right: 5px; font-weight: bold;}
+        
+        .checkbox-group { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; }
+        .checkbox-group label { display: flex; align-items: center; gap: 3px; }
+        .small-text { font-size: 8px; color: #555; text-align: justify; line-height: 1.3; }
+
+        /* Tabellen Layout */
+        .table-layout { width: 100%; border-collapse: collapse; margin-top: 5px; font-size: 8px; }
+        .table-layout th, .table-layout td { border: 1px solid #ccc; padding: 3px; text-align: center; }
+
+        /* Rechtlicher Footer */
+        .legal-footer { font-size: 6px; color: #777; text-align: center; margin-top: auto; border-top: 1px solid #ccc; padding-top: 5px; line-height: 1.3; }
+    </style>
+</head>
+<body>
+    <div class="a4-container">
+        <div class="content-wrapper">
+            
+            <!-- HEADER -->
+            <div class="sv-header-container">
+                <div class="header-title">Servicevereinbarung</div>
+                <div class="sv-logo">Rentokil<span>Die Schädlingsexperten</span></div>
+            </div>
+
+            <div class="col-container">
+                <!-- ================= LINKE SPALTE ================= -->
+                <div class="col-left">
+                    <div class="row" style="margin-bottom: 8px;">
+                        <label>Datum:</label>
+                        <!-- Wird durch logik.js live synchronisiert -->
+                        <input type="text" class="dotted-input" id="sv-datum">
+                    </div>
+                    <div class="checkbox-group" style="margin-bottom: 8px;">
+                        <label><input type="checkbox"> Neuvertrag</label>
+                        <label><input type="checkbox"> Vertr.-Ergänzung</label>
+                        <label><input type="checkbox"> Vertr.-Änder.</label>
+                        <label><input type="checkbox"> Job</label>
+                    </div>
+                    
+                    <div class="row"><label>Kunden-Nr.:</label><input type="text" class="dotted-input"></div>
+                    <div class="row"><label>Vertr./Job-Nr.:</label><input type="text" class="dotted-input"></div>
+                    <div class="row"><label>Serviceanschrift-Nr.:</label><input type="text" class="dotted-input"></div>
+
+                    <div class="section-title">Vertragspartner</div>
+                    <!-- Wird durch logik.js live synchronisiert -->
+                    <input type="text" class="dotted-input" placeholder="Firmenname/Name des Kunden" id="sv-kunde">
+                    <input type="text" class="dotted-input" placeholder="Vor- und Zuname des Inhabers/Geschäftsführers">
+                    <input type="text" class="dotted-input" placeholder="Straße">
+                    <div class="row" style="gap:5px;">
+                        <input type="text" class="dotted-input" placeholder="PLZ" style="width: 30%;">
+                        <input type="text" class="dotted-input" placeholder="Ort">
+                    </div>
+                    <div class="row" style="gap:5px; margin-top: 4px;">
+                        <input type="text" class="dotted-input" placeholder="E-Mail-Adresse für digitalen Rechnungsversand">
+                        <label style="font-size:7px;"><input type="checkbox"> Rechnungsversand per Post ist erwünscht</label>
+                    </div>
+                    <input type="text" class="dotted-input" placeholder="Umsatzsteuer-ID">
+
+                    <div class="section-title">Abweichende Rechnungsadresse</div>
+                    <input type="text" class="dotted-input" placeholder="Vertragspartner C/O Firmenname/Name">
+                    <input type="text" class="dotted-input" placeholder="Straße">
+                    <div class="row" style="gap:5px;">
+                        <input type="text" class="dotted-input" placeholder="PLZ" style="width: 30%;">
+                        <input type="text" class="dotted-input" placeholder="Ort">
+                    </div>
+
+                    <div class="section-title">Abweichende Serviceanschrift</div>
+                    <input type="text" class="dotted-input" placeholder="Firmenname/Name des Kunden">
+                    <input type="text" class="dotted-input" placeholder="Straße">
+                    <div class="row" style="gap:5px;">
+                        <input type="text" class="dotted-input" placeholder="PLZ" style="width: 30%;">
+                        <input type="text" class="dotted-input" placeholder="Ort">
+                    </div>
+
+                    <div class="section-title">Kunden-Kontakt für Rentokil Verkauf</div>
+                    <input type="text" class="dotted-input" placeholder="Name">
+                    <input type="text" class="dotted-input" placeholder="Telefon">
+                    <input type="text" class="dotted-input" placeholder="E-Mail-Adresse">
+
+                    <div class="section-title">Kunden-Kontakt für Rentokil Service</div>
+                    <input type="text" class="dotted-input" placeholder="Name">
+                    <input type="text" class="dotted-input" placeholder="Telefon">
+                    <input type="text" class="dotted-input" placeholder="E-Mail-Adresse">
+
+                    <div class="row" style="margin-top: 10px;">
+                        <label>Mögliche Arbeitszeiten von</label> <input type="text" class="dotted-input" style="width:40px;">
+                        <label>bis:</label> <input type="text" class="dotted-input" style="width:40px;">
+                    </div>
+
+                    <div class="section-title" style="font-size:9px;">Wurden im Vorfeld Bekämpfungsmaßnahmen durchgeführt?</div>
+                    <div class="checkbox-group">
+                        <label><input type="checkbox"> Ja - Eigenbehandlungen</label>
+                        <label><input type="checkbox"> Nein</label>
+                        <label><input type="checkbox"> durch Rentokil</label>
+                    </div>
+                    <div class="row"><label>Mittel:</label><input type="text" class="dotted-input"> <label>Menge:</label><input type="text" class="dotted-input"></div>
+                    <div class="checkbox-group" style="margin-top:2px;">
+                        <label><input type="checkbox"> Ja - durch einen anderen Schädlingsbekämpfer</label>
+                    </div>
+                    <div class="row"><label>Mittel:</label><input type="text" class="dotted-input"> <label>Menge:</label><input type="text" class="dotted-input"></div>
+                    
+                    <div class="small-text" style="margin-top: 4px;">
+                        Rentokil setzt nur zugelassene/sich im Zulassungsverfahren befindliche Biozide, physikalische, mechanische und biologische Methoden ein. Persistente Biozide haben eine Wirkzeit über Monate. Die Freigabe von Räumen ist methodenabhängig und erfolgt über den Servicebeleg.
+                    </div>
+
+                    <div class="section-title" style="margin-top:10px;">Zielfläche: Servicebereiche Jobs/RVS (Ort/Räumlichkeiten)</div>
+                    <input type="text" class="dotted-input">
+                    <input type="text" class="dotted-input">
+                    <input type="text" class="dotted-input">
+                    <input type="text" class="dotted-input">
+                </div>
+
+                <!-- ================= RECHTE SPALTE ================= -->
+                <div class="col-right">
+                    <div class="section-title" style="margin-top:0;">Zertifizierung</div>
+                    <div class="checkbox-group">
+                        <label><input type="checkbox"> Zertifizierung/Auditierung geplant ab/bestehend seit:</label>
+                        <input type="text" class="dotted-input" style="width:40px;">
+                    </div>
+                    <div class="checkbox-group" style="margin-top:4px;">
+                        <label><input type="checkbox"> Bioland</label>
+                        <label><input type="checkbox"> BRC</label>
+                        <label><input type="checkbox"> AIB</label>
+                        <label><input type="checkbox"> IFS Food/Logistik</label>
+                        <label><input type="checkbox"> Demeter</label>
+                    </div>
+
+                    <div class="section-title">Dokumentationsform</div>
+                    <div class="checkbox-group">
+                        <label><input type="checkbox"> myRentokil Lite</label>
+                        <label><input type="checkbox"> Premium</label>
+                        <label><input type="checkbox"> PestConnect</label>
+                        <label style="margin-left:10px;">Anzahl digitale Pläne:</label><input type="text" class="dotted-input" style="width:30px;">
+                    </div>
+                    
+                    <div class="small-text" style="margin-top:4px; font-weight:bold;">Erweiterungskomponenten myRentokil Dokumentation & PestConnect Service</div>
+                    <div class="checkbox-group" style="font-size:8px;">
+                        <label><input type="checkbox"> Ordner</label>
+                        <label><input type="checkbox"> Checkliste/Mieterliste</label>
+                        <label><input type="checkbox"> Servicebeleg</label>
+                        <label><input type="checkbox"> Datierung</label>
+                        <label><input type="checkbox"> Nummerierung (C.P.)</label>
+                        <label><input type="checkbox"> Leistungsbeschreibung</label>
+                        <label><input type="checkbox"> Aktionsbericht</label>
+                        <label><input type="checkbox"> Firmenplan</label>
+                    </div>
+
+                    <div class="section-title">A. Vertragsform X x 3</div>
+                    <div style="display:flex; justify-content:space-between; font-size:8px; font-weight: bold;">
+                        <div>Frequenz der Regelservices</div>
+                        <div>Hausmaus: innen</div>
+                        <div>Wanderratte: innen / außen</div>
+                    </div>
+                    <div style="display:flex; justify-content:space-between; align-items:center; margin-top: 4px;">
+                        <div class="checkbox-group">
+                            <label><input type="checkbox"> 4x3</label>
+                            <label><input type="checkbox" style="margin-left: 10px;"> 6x3</label>
+                        </div>
+                        <div style="display:flex; gap:15px;"><input type="text" class="dotted-input" style="width:15px; border:1px solid #ccc;"></div>
+                        <div style="display:flex; gap:10px;">
+                            <input type="text" class="dotted-input" style="width:15px; border:1px solid #ccc;">
+                            <input type="text" class="dotted-input" style="width:15px; border:1px solid #ccc;">
+                        </div>
+                    </div>
+                    
+                    <div class="small-text" style="margin-top: 5px;">
+                        Für den Service 4x3/6x3 gilt: Es sind je Regelservice, je nach Notwendigkeit, bis zu zwei Zusatzbehandlungen enthalten. Sollte im Rahmen eines Regelservice die Notwendigkeit festgestellt werden, werden die entsprechenden Köderstationen schon während des Regelservice auf toxische Präparate umgestellt. Darauf folgen bis zu 2 zusätzliche Behandlungen. Diese befallsorientierten Zusatzbehandlungen sind in den Quartalswerten inkludiert. Nicht im Rahmen des Regelservice aktivierte Zusatzbehandlungen können kundenseitig noch bis zum jeweils folgenden Regelservice abgerufen werden. Sie verfallen spätestens mit dem nächsten Regelservice. Nicht aktivierte Zusatzbehandlungen sind weder auf die Zeit nach dem nachfolgenden Regelservice noch auf das Folgejahr übertragbar.
+                    </div>
+
+                    <div class="section-title">B. Vertragsform Varioservice (Inspektionen, Behandlungen, Schädlinge)</div>
+                    <table class="table-layout">
+                        <tr style="font-weight:bold; background: #f9f9f9;">
+                            <td colspan="3" style="border:none; text-align: left;">Anzahl jährliche Regelservices:</td>
+                            <td colspan="3" style="border:none;"><input type="text" class="dotted-input" style="width:40px; border: 1px solid #ccc;"></td>
+                        </tr>
+                        <tr>
+                            <th style="font-weight: normal;">Monitoring</th>
+                            <th style="font-weight: normal;">Bekämpfend</th>
+                            <th style="font-weight: normal;">PestConnect</th>
+                            <th style="font-weight: normal;">Schädlinge</th>
+                            <th style="font-weight: normal;">Innen</th>
+                            <th style="font-weight: normal;">Außen</th>
+                        </tr>
+                        <tr><td><input type="checkbox"></td><td><input type="checkbox"></td><td><input type="checkbox"></td><td><input type="text" class="dotted-input"></td><td><input type="checkbox"></td><td><input type="checkbox"></td></tr>
+                        <tr><td><input type="checkbox"></td><td><input type="checkbox"></td><td><input type="checkbox"></td><td><input type="text" class="dotted-input"></td><td><input type="checkbox"></td><td><input type="checkbox"></td></tr>
+                        <tr><td><input type="checkbox"></td><td><input type="checkbox"></td><td><input type="checkbox"></td><td><input type="text" class="dotted-input"></td><td><input type="checkbox"></td><td><input type="checkbox"></td></tr>
+                        <tr><td><input type="checkbox"></td><td><input type="checkbox"></td><td><input type="checkbox"></td><td><input type="text" class="dotted-input"></td><td><input type="checkbox"></td><td><input type="checkbox"></td></tr>
+                        <tr><td><input type="checkbox"></td><td><input type="checkbox"></td><td><input type="checkbox"></td><td><input type="text" class="dotted-input"></td><td><input type="checkbox"></td><td><input type="checkbox"></td></tr>
+                        <tr><td><input type="checkbox"></td><td><input type="checkbox"></td><td><input type="checkbox"></td><td><input type="text" class="dotted-input"></td><td><input type="checkbox"></td><td><input type="checkbox"></td></tr>
+                    </table>
+
+                    <div class="section-title">C. Sachverständigeninspektionen und Analysen</div>
+                    <div class="row"><input type="text" class="dotted-input" style="width:80%;"> <label style="font-weight:normal;">Anzahl/Jahr:</label> <input type="text" class="dotted-input" style="width:20px; border: 1px solid #ccc;"></div>
+                    <div class="row"><input type="text" class="dotted-input" style="width:80%;"> <label style="font-weight:normal;">Anzahl/Jahr:</label> <input type="text" class="dotted-input" style="width:20px; border: 1px solid #ccc;"></div>
+
+                    <div class="section-title">D. Liefervereinbarung für folgende Nebenleistungen</div>
+                    <table class="table-layout" style="text-align:left;">
+                        <tr><th>PestConnect Router, bis zu</th><td style="width:20px;"><input type="text" class="dotted-input"></td><td style="font-style:italic; font-size: 7px; color: #888;">Bereitstellungspauschale</td></tr>
+                        <tr><th>PestConnect Dual Autogate</th><td><input type="text" class="dotted-input"></td><td style="font-style:italic; font-size: 7px; color: #888;">Bereitstellungspauschale</td></tr>
+                        <tr><th>PestConnect RADAR X Connect</th><td><input type="text" class="dotted-input"></td><td style="font-style:italic; font-size: 7px; color: #888;">Bereitstellungspauschale</td></tr>
+                        <tr><th>PestConnect RRC1</th><td><input type="text" class="dotted-input"></td><td style="font-style:italic; font-size: 7px; color: #888;">Bereitstellungspauschale</td></tr>
+                        <tr><th>PestConnect Optix Router</th><td><input type="text" class="dotted-input"></td><td style="font-style:italic; font-size: 7px; color: #888;">Bereitstellungspauschale</td></tr>
+                        <tr><th>PestConnect Optix</th><td><input type="text" class="dotted-input"></td><td style="font-style:italic; font-size: 7px; color: #888;">Bereitstellungspauschale</td></tr>
+                        <tr><td colspan="2"><input type="text" class="dotted-input"></td><td style="text-align:right;">€ 0,00</td></tr>
+                        <tr><td colspan="2"><input type="text" class="dotted-input"></td><td style="text-align:right;">€ 0,00</td></tr>
+                        <tr><th colspan="2" style="text-align: right;">Gesamt € netto</th><td style="text-align:right; font-weight: bold; background:#f4f4f4;">€ 0,00</td></tr>
+                    </table>
+
+                    <div class="section-title" style="margin-top:10px;">Die Räume können wieder betreten werden:</div>
+                    <div class="checkbox-group" style="font-size:8px;">
+                        <label><input type="checkbox"> sofort</label>
+                        <label><input type="checkbox"> nach einer Einwirkzeit von <input type="text" class="dotted-input" style="width:20px;"> Std.</label>
+                        <label><input type="checkbox"> nach einer Lüftungszeit von <input type="text" class="dotted-input" style="width:20px;"> Std.</label>
+                    </div>
+                    
+                    <div class="small-text" style="margin-top:4px;">
+                        Die Nachsorge/Neutralisation nicht mehr benötigter Mittelreste (Rodentizide) von Zielflächen erfolgt durch Rentokil nach Befallstilgung o. Auftragsende.
+                    </div>
+
+                    <div class="row" style="margin-top:5px; font-weight:bold; font-size:8px;"> Absaugen der Flächen (Feinfilter) nach der Behandlung: </div>
+                    <div class="checkbox-group" style="font-size:8px; margin-bottom:5px;">
+                        <label><input type="checkbox"> durch den Auftraggeber</label>
+                        <label><input type="checkbox"> durch Rentokil</label>
+                    </div>
+
+                    <div class="row" style="font-weight:bold; font-size:8px;"> Einsatz alkalischer Haushaltsreiniger (Einwirkzeit 10 Min.): </div>
+                    <div class="checkbox-group" style="font-size:8px; margin-bottom:5px;">
+                        <label><input type="checkbox"> durch den Auftraggeber</label>
+                        <label><input type="checkbox"> durch Rentokil</label>
+                    </div>
+
+                    <div class="row" style="font-weight:bold; font-size:8px;">
+                        <label>Montageort Router:</label><input type="text" class="dotted-input" style="margin-right: 10px;">
+                        <label>Steckdose(n) vorhanden:</label><input type="checkbox">
+                    </div>
+
+                    <div class="row" style="font-weight:bold; font-size:8px;">
+                        <label>Servicebereich PestConnect:</label><input type="text" class="dotted-input">
+                    </div>
+
+                </div>
+            </div>
+
+        </div> <!-- Wrapper Ende -->
+
+        <!-- RECHTLICHER FOOTER -->
+        <div class="legal-footer">
+            Rentokil Initial GmbH & Co. KG Sitz der Gesellschaft: Lingen| Handelsregister: Amtsgericht Osnabrück, HRA 205815 | USt-ID-Nummer: DE119356205 | Persönlich haftende Gesellschafterin: Rentokil Holdings GmbH | Sitz: Lingen, Amtsgericht Osnabrück HRB 212175 | Geschäftsführer: Frank Reisgies, Fabrice Quinquenel | ING Bank IBAN: DE66 5002 1000 0018 3111 00 | BIC: INGBDEF
+        </div>
+    </div>
+</body>
+</html>

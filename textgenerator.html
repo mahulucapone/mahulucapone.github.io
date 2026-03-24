@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <title>Textgenerator & UNLOCK PHRASES</title>
+    <style>
+        /* A4 Hochformat Zwang */
+        body { margin: 0; font-family: Arial, sans-serif; background: #fff; }
+        .a4-page { width: 100%; max-width: 820px; height: 1160px; padding: 40px 45px; box-sizing: border-box; display: flex; flex-direction: column; background: #fff; }
+        .header-title { color: #e30613; font-size: 20px; font-weight: bold; border-bottom: 2px solid #e30613; padding-bottom: 5px; margin-bottom: 20px; text-transform: uppercase; }
+        
+        .tg-layout { display: flex; gap: 20px; flex-grow: 1; overflow: hidden; }
+        
+        /* LINKE SPALTE (Menü mit Checkboxen) */
+        .tg-left { width: 45%; border-right: 1px solid #ccc; padding-right: 15px; overflow-y: auto; }
+        .cat-title { font-weight: bold; color: #005A9C; font-size: 11px; margin-top: 10px; margin-bottom: 5px; cursor: pointer; background: #f4f4f4; padding: 8px; border-left: 4px solid #005A9C; border-radius: 2px; text-transform: uppercase; display: flex; justify-content: space-between; }
+        .cat-title:hover { background: #e8f4f8; }
+        
+        .phrase-item { font-size: 10px; color: #333; padding: 6px 8px; border-bottom: 1px dashed #eee; display: flex; gap: 8px; align-items: flex-start; line-height: 1.3; }
+        .phrase-item:hover { background: #fdf1f2; }
+        .phrase-item input[type="checkbox"] { margin-top: 2px; cursor: pointer; }
+        
+        .tg-phrases-container { display: none; } /* Standardmäßig zugeklappt */
+        
+        /* RECHTE SPALTE (Ausgabe) */
+        .tg-right { width: 55%; display: flex; flex-direction: column; }
+        .email-box { flex-grow: 1; border: 1px solid #ccc; padding: 15px; font-family: Arial, sans-serif; font-size: 11px; resize: none; background: #fdfdfd; outline: none; line-height: 1.5; box-shadow: inset 0 2px 4px rgba(0,0,0,0.02); }
+        .email-box:focus { border-color: #005A9C; background: #fff; }
+        
+        .action-bar { display: flex; gap: 10px; justify-content: flex-end; margin-top: 15px; }
+        .btn { padding: 8px 15px; border: none; cursor: pointer; font-weight: bold; border-radius: 3px; font-size: 11px; transition: 0.2s; }
+        .btn-clear { background: #f4f4f4; color: #333; border: 1px solid #ccc; }
+        .btn-copy { background: #005A9C; color: #fff; }
+        .btn-gmail { background: #e30613; color: #fff; }
+        .btn:hover { opacity: 0.9; transform: translateY(-1px); }
+        
+        /* ERFOLGS-POPUP */
+        .popup-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.4); display: none; justify-content: center; align-items: center; z-index: 1000; }
+        .popup-box { background: #fff; width: 320px; border-radius: 16px; padding: 25px; box-shadow: 0 10px 25px rgba(0,0,0,0.2); font-family: Arial, sans-serif; }
+        .popup-title { font-size: 22px; margin-bottom: 15px; color: #202124; font-weight: normal; }
+        .popup-text { font-size: 13px; color: #5f6368; margin-bottom: 30px; line-height: 1.4; }
+        .popup-btn { display: block; width: 100%; text-align: right; color: #1a73e8; font-weight: bold; cursor: pointer; border: none; background: none; font-size: 14px; outline: none; }
+        .popup-btn:hover { color: #174ea6; }
+    </style>
+</head>
+<body>
+    <div class="a4-page">
+        <div class="header-title">E-Mail & Textgenerator (UNLOCK PHRASES)</div>
+        <div style="font-size:10px; margin-bottom:20px; color:#555;">
+            Bauen Sie hier Ihren individuellen E-Mail-Entwurf zusammen. Wählen Sie links die passenden Textbausteine und hängen Sie bei Bedarf die weiterführenden PDF-Links an. Der Rohtext kann rechts manuell verfeinert werden.
+        </div>
+
+        <div class="tg-layout">
+            <!-- LINKE SPALTE: Baukasten -->
+            <div class="tg-left" id="tg-menu">
+                <!-- Wird per JavaScript befüllt -->
+            </div>
+
+            <!-- RECHTE SPALTE: Arbeitsfläche -->
+            <div class="tg-right">
+                <div style="font-size: 10px; color: #555; margin-bottom: 5px; font-weight: bold;">Betreff: Ihr Angebot zur Schädlingsbekämpfung</div>
+                <textarea id="email-output" class="email-box" placeholder="Klicken Sie links auf die Textbausteine, um Ihre E-Mail strukturiert aufzubauen..."></textarea>
+                
+                <div class="action-bar">
+                    <button class="btn btn-clear" onclick="clearText()">🗑 Text löschen</button>
+                    <button class="btn btn-copy" id="btn-copy" onclick="copyText()">📋 Kopieren</button>
+                    <button class="btn btn-gmail" onclick="openGmail()">🚀 In Gmail öffnen</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- GOOGLE-STYLE ERFOLGS POPUP -->
+    <div class="popup-overlay" id="success-popup">
+        <div class="popup-box">
+            <div class="popup-title">Erfolg!</div>
+            <div class="popup-text">Der E-Mail-Entwurf wurde erfolgreich in Ihrem Gmail-Konto erstellt.</div>
+            <button class="popup-btn" onclick="closePopup()">OK</button>
+        </div>
+    </div>
+
+    <script>
+        // 1. DIE DATENBANK DER TEXTBAUSTEINE UND LINKS
+        const unlockPhrases = {
+            "1. Einstieg & Akquise": [
+                "Guten Tag Herr [Name],",
+                "Sehr geehrte Damen und Herren,",
+                "Vielen Dank für Ihre Nachricht und Ihr Interesse an unseren erstklassigen Dienstleistungen.",
+                "An Ihrem Standort wurde ein eindeutiger Schädlingsbefall festgestellt. Handeln Sie jetzt für sofortige Sicherheit!",
+                "Als weltweiter Marktführer im Schädlingsmanagement schützt Rentokil Ihr Unternehmen umfassend. Wir bieten innovative Lösungen und Top-Experten, um Gesundheit zu sichern, Risiken zu minimieren und Ihr Markenimage zu stärken."
+            ],
+            "2. Auftragsdetails & Zielbereich": [
+                "Anbei finden Sie Ihr persönliches Angebot in Form einer Servicevereinbarung für effektive Schädlingsbekämpfung.",
+                "Anbei sende ich Ihnen die Servicevereinbarung für eine sofortige Akutbehandlung und die Option zur Installation unseres dauerhaften, giftfreien PestConnect Monitorings.",
+                "Zielbereich der Maßnahme ist der gesamte Innen- & Außenbereich.",
+                "Als Zielbereich habe ich den betroffenen Raum/Ort sowie angrenzende Bereiche für maximale Sicherheit definiert."
+            ],
+            "3. PestConnect & BAuA Gesetze": [
+                "Wir stehen vor einem wichtigen Wandel im Schädlingsmanagement: Viele bewährte Präparate verlieren ihre Zulassung für den Dauereinsatz. Ihr bisheriger Schutz ist so nicht mehr möglich.",
+                "Wir passen Verträge auf giftfreies Monitoring um: Intelligente Systeme melden Aktivität in Echtzeit, Akutbehandlungen starten nur bei Bedarf. PestConnect ist Ihre gesetzeskonforme Zukunftslösung.",
+                "Das Dual AutoGate bietet intelligenten Ratten-Schutz: Es öffnet sich nach Feststellung von Aktivitäten, ist mit wenig NON-Tox-Köder bestückt und wird bei Bedarf auf Tox umgestellt.",
+                "RADAR Connect: Die hygienische CO2-Lösung für Mäuse. 24/7-Erkennung und Beseitigung, ohne Rodentizide.",
+                "Kontrollieren Sie Ihre Kosten: Akutmaßnahmen starten nur bei Bedarf und nach Ihrer Freigabe. Soforteinsätze sind als 'Call-Out' vordefiniert."
+            ],
+            "4. Hauptgrund & Empfehlung": [
+                "Nach Meldungen und Berichten empfehlen wir eine sofortige Behandlung, um dem steigenden Befall entgegenzuwirken und größere Schäden zu verhindern.",
+                "Bauliche Mängel begünstigen den Schädlingsbefall und verringern den langfristigen Behandlungserfolg.",
+                "Sorgen Sie für eine gründliche Abdichtung potenzieller Eintrittspforten (Fenster, Türen, Rohrdurchführungen), um Nagern den Zugang zu verwehren.",
+                "Ich empfehle eine hochwirksame 3+1 Maßnahme für nachhaltige Ergebnisse.",
+                "Ich empfehle eine effektive Kombination aus Sprüh- und Fraßgelbehandlung, individuell auf Ihre Zielbereiche abgestimmt."
+            ],
+            "5. Auftragsabwicklung & Kosten": [
+                "Ein Besuch ohne Auftrag ist leider nicht möglich. Die Behandlung startet erst nach Annahme der Servicevereinbarung.",
+                "Die Kosten zur Durchführung der nötigen Schädlingsbekämpfungsmaßnahme, inklusive aller Produkte, Anfahrten und Leistungen, belaufen sich auf: _______€",
+                "Die einmaligen Kosten für die Systemeinrichtung werden berechnet mit: _______€",
+                "Sparen Sie Kosten: Bis zu 20 % der Schädlingsbekämpfungskosten (max. 1.200 €/Jahr) sind steuerlich absetzbar."
+            ],
+            "6. Abschluss (Closer)": [
+                "Bitte teilen Sie mir mit, ob Sie mit dieser angepassten Servicevereinbarung einverstanden sind und wir diese erfassen können.",
+                "Lassen Sie uns diese wichtige Aufgabe schnellstmöglich angehen, um Hygiene und Sicherheit am Standort zu gewährleisten.",
+                "Für Rückfragen stehe ich Ihnen jederzeit gerne zur Verfügung.",
+                "Menschen schützen. Leben verbessern. Unsere Erde bewahren."
+            ],
+            "7. 📎 Anlagen & Info-Links": [
+                "Info-Broschüre PestConnect:\nhttps://rentokil.com/de/Pest_connect_de.pdf",
+                "KMB 14 Connect Systeme:\nhttps://rentokil.com/de/14_KMB_Connect_Systeme.pdf",
+                "KMB 07 Schadnager:\nhttps://rentokil.com/de/07_KMB_Schadnager.pdf",
+                "KMB 09 Flexi Armour (Abdichtung):\nhttps://rentokil.com/de/09_KMB_Flexi_Armour_Schadnagerprophylaxe.pdf",
+                "KMB 11 Lumnia & Luminos:\nhttps://rentokil.com/de/11_KMB_UV_Lockfallen_Lumnia_und_LuminosSerie.pdf",
+                "KMB 05 Köder-Gelverfahren (Insekten):\nhttps://rentokil.com/de/05_KMB_Koeder-Gelverfahren_gegen_Gliederfuesser.pdf"
+            ]
+        };
+
+        const menu = document.getElementById('tg-menu');
+        const output = document.getElementById('email-output');
+
+        // 2. KATEGORIEN UND CHECKBOXEN GENERIEREN
+        for (let cat in unlockPhrases) {
+            // Kategorie-Titel
+            let catTitle = document.createElement('div');
+            catTitle.className = 'cat-title';
+            catTitle.innerHTML = `<span>${cat}</span> <span>+</span>`;
+            menu.appendChild(catTitle);
+
+            // Container für die Checkboxen (Standardmäßig zugeklappt)
+            let phraseList = document.createElement('div');
+            phraseList.className = 'tg-phrases-container';
+
+            // AKKORDEON LOGIK (Auf- und Zuklappen)
+            catTitle.onclick = () => {
+                let isHidden = phraseList.style.display === "none" || phraseList.style.display === "";
+                
+                // Schließe alle anderen offenen Kategorien
+                document.querySelectorAll('.tg-phrases-container').forEach(list => {
+                    list.style.display = "none";
+                });
+                document.querySelectorAll('.cat-title').forEach(title => {
+                    title.innerHTML = `<span>${title.innerText.replace(' +', '').replace(' -', '')}</span> <span>+</span>`;
+                });
+
+                // Öffne aktuelle Kategorie, wenn sie versteckt war
+                if (isHidden) {
+                    phraseList.style.display = "block";
+                    catTitle.innerHTML = `<span>${cat}</span> <span>-</span>`;
+                }
+            };
+
+            // Phrasen einfügen
+            unlockPhrases[cat].forEach(text => {
+                let item = document.createElement('label');
+                item.className = 'phrase-item';
+                
+                let checkbox = document.createElement('input');
+                checkbox.type = 'checkbox';
+                checkbox.value = text;
+                checkbox.className = 'tg-checkbox';
+                
+                // Bei Klick: Text neu aufbauen (Links automatisch trennen)
+                checkbox.addEventListener('change', updateText);
+                
+                item.appendChild(checkbox);
+                item.appendChild(document.createTextNode(text));
+                phraseList.appendChild(item);
+            });
+            
+            menu.appendChild(phraseList);
+        }
+
+        // 3. TEXT-UPDATE LOGIK (Trennt Text und PDF-Links)
+        function updateText() {
+            let selected = document.querySelectorAll('.tg-checkbox:checked');
+            let textArray = [];
+            let linksArray = [];
+
+            selected.forEach(chk => {
+                // Trenne normale Sätze von Links (Links beinhalten "http")
+                if(chk.value.includes('http')) {
+                    linksArray.push(chk.value);
+                } else {
+                    textArray.push(chk.value);
+                }
+            });
+
+            let finalText = textArray.join('\n\n');
+
+            // Hänge Links mit Trennlinie ans Ende, falls ausgewählt
+            if(linksArray.length > 0) {
+                finalText += (finalText ? "\n\n---\n" : "") + "Weiterführende Informationen & Anlagen:\n\n" + linksArray.join('\n\n');
+            }
+
+            output.value = finalText;
+        }
+
+        // 4. FUNKTIONEN DER BUTTONS
+        function clearText() {
+            document.querySelectorAll('.tg-checkbox').forEach(c => c.checked = false);
+            output.value = "";
+        }
+
+        function copyText() {
+            if(!output.value) return;
+            navigator.clipboard.writeText(output.value).then(() => {
+                let btn = document.getElementById('btn-copy');
+                btn.innerText = "✅ Kopiert!";
+                btn.style.background = "#00a650";
+                setTimeout(() => {
+                    btn.innerText = "📋 Kopieren";
+                    btn.style.background = "#005A9C";
+                }, 2000);
+            });
+        }
+
+        function openGmail() {
+            if(!output.value) {
+                alert("Bitte wählen Sie zuerst Textbausteine aus.");
+                return;
+            }
+            let mailBody = encodeURIComponent(output.value);
+            let mailSubject = encodeURIComponent("Ihr Angebot zur Schädlingsbekämpfung");
+            // Öffnet Gmail in neuem Tab
+            window.open(`https://mail.google.com/mail/?view=cm&fs=1&su=${mailSubject}&body=${mailBody}`, '_blank');
+            // Zeigt das Erfolgs-Popup an
+            document.getElementById('success-popup').style.display = 'flex';
+        }
+
+        function closePopup() {
+            document.getElementById('success-popup').style.display = 'none';
+        }
+    </script>
+</body>
+</html>

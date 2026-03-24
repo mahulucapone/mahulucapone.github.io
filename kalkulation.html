@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <title>Kalkulation</title>
+    <style>
+        body { margin: 0; font-family: Arial, sans-serif; background: #fff; }
+        .a4-page { width: 100%; max-width: 820px; min-height: 1160px; padding: 40px 45px; box-sizing: border-box; font-size: 9px; line-height: 1.2; color: #000; position: relative; margin: 0 auto; display: block; }
+        
+        .header-container { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 20px; border-bottom: 1px solid #ccc; padding-bottom: 10px; }
+        .header-title { color: #e30613; font-size: 20px; font-weight: bold; margin: 0; display: flex; align-items: center; gap: 20px; }
+        .header-inputs { display: flex; gap: 15px; font-size: 10px; color: #333; font-weight: normal; }
+        .dotted-input { border: none; border-bottom: 1px dotted #000; background: transparent; font-size: 10px; padding: 2px 0; outline: none; font-family: Arial; width: 100%; }
+        
+        .sv-logo { text-align: right; color: #e30613; font-size: 24px; font-weight: bold; letter-spacing: -1px; line-height: 0.9; }
+        .sv-logo span { display: block; font-size: 8px; color: #333; font-weight: normal; letter-spacing: 0; margin-top: 2px; }
+        
+        .red-header { color: #e30613; font-weight: bold; font-size: 10px; margin: 15px 0 5px 0; }
+        table { width: 100%; border-collapse: collapse; text-align: center; margin-bottom: 10px; }
+        th, td { border: 1px solid #000; padding: 3px 2px; font-size: 8px; vertical-align: middle; height: 18px; }
+        th { font-weight: bold; background: #fff; }
+        
+        .input-cell { width: 100%; border: none; text-align: center; font-size: 9px; outline: none; background: transparent; font-family: inherit; box-sizing: border-box; }
+        .input-cell-right { text-align: right; padding-right: 5px; }
+        .bold-cell { font-weight: bold; background: #f4f4f4; }
+        .total-row td { border-top: 2px solid #000; border-bottom: 2px solid #000; font-weight: bold; font-size: 10px; }
+    </style>
+</head>
+<body>
+    <div class="a4-page">
+        <!-- HEADER -->
+        <div class="header-container">
+            <div class="header-title">
+                Kalkulation
+                <div class="header-inputs">
+                    <div>Kunde: <input type="text" class="dotted-input" style="width: 150px;"></div>
+                    <div>Datum: <input type="text" class="dotted-input" style="width: 80px;"></div>
+                </div>
+            </div>
+            <div class="sv-logo">Rentokil<span>Die Schädlingsexperten</span></div>
+        </div>
+
+        <!-- VERTRAG: 4x3 / 6x3 -->
+        <div class="red-header">Vertrag: Kalkulation 4x3 / 6x3</div>
+        <table>
+            <tr>
+                <th style="width: 15%;">Schädling</th>
+                <th style="width: 12%;">Zeit in Min. pro<br>Behandlung</th>
+                <th style="width: 12%;">Anzahl<br>Behandlungen pro<br>Jahr</th>
+                <th style="width: 15%;">Wert in € pro Quartal</th>
+                <th style="width: 16%;">Anzahl inkludierte<br>Zusatzbehandlungen</th>
+                <th style="width: 15%;">Wert in € pro Jahr lt. Preisliste</th>
+                <th style="width: 15%;">Auftragswert in € pro Jahr</th>
+            </tr>
+            <tr>
+                <td><input type="text" class="input-cell" value="4x3/6x3 Nager" style="font-weight:bold;"></td>
+                <td><input type="text" class="input-cell"></td>
+                <td><input type="text" class="input-cell"></td>
+                <td><input type="text" class="input-cell"></td>
+                <td style="text-align: left; padding-left: 5px;">
+                    <label style="display:flex; align-items:center; gap:3px;"><input type="radio" name="zusatz"> 8 (4x3)</label>
+                    <label style="display:flex; align-items:center; gap:3px;"><input type="radio" name="zusatz"> 12 (6x3)</label>
+                </td>
+                <td class="bold-cell"><input type="text" class="input-cell input-cell-right" value="0,00 €" readonly></td>
+                <td class="bold-cell"><input type="text" class="input-cell input-cell-right" value="0,00 €"></td>
+            </tr>
+        </table>
+
+        <!-- VERTRAG: STANDARD -->
+        <div class="red-header">Vertrag: Kalkulation Standard-Regelservice</div>
+        <table>
+            <tr>
+                <th style="width: 15%;">Schädling</th>
+                <th style="width: 12%;">Zeit in Min. pro<br>Behandlung</th>
+                <th style="width: 12%;">Wert in € pro<br>Behandlung</th>
+                <th style="width: 15%;">Anzahl<br>Behandlungen<br>/Jahr</th>
+                <th style="width: 16%;">Anzahl<br>SV-Inspektionen /<br>Jahr</th>
+                <th style="width: 15%;">Wert in € pro Jahr lt. Preisliste</th>
+                <th style="width: 15%;">Auftragswert in € pro Jahr</th>
+            </tr>
+            <!-- 5 leere Zeilen -->
+            <tr><td><input type="text" class="input-cell"></td><td><input type="text" class="input-cell"></td><td><input type="text" class="input-cell"></td><td><input type="text" class="input-cell"></td><td><input type="text" class="input-cell"></td><td><input type="text" class="input-cell input-cell-right"></td><td><input type="text" class="input-cell input-cell-right"></td></tr>
+            <tr><td><input type="text" class="input-cell"></td><td><input type="text" class="input-cell"></td><td><input type="text" class="input-cell"></td><td><input type="text" class="input-cell"></td><td><input type="text" class="input-cell"></td><td><input type="text" class="input-cell input-cell-right"></td><td><input type="text" class="input-cell input-cell-right"></td></tr>
+            <tr><td><input type="text" class="input-cell"></td><td><input type="text" class="input-cell"></td><td><input type="text" class="input-cell"></td><td><input type="text" class="input-cell"></td><td><input type="text" class="input-cell"></td><td><input type="text" class="input-cell input-cell-right"></td><td><input type="text" class="input-cell input-cell-right"></td></tr>
+            <tr><td><input type="text" class="input-cell"></td><td><input type="text" class="input-cell"></td><td><input type="text" class="input-cell"></td><td><input type="text" class="input-cell"></td><td><input type="text" class="input-cell"></td><td><input type="text" class="input-cell input-cell-right"></td><td><input type="text" class="input-cell input-cell-right"></td></tr>
+            <tr><td><input type="text" class="input-cell"></td><td><input type="text" class="input-cell"></td><td><input type="text" class="input-cell"></td><td><input type="text" class="input-cell"></td><td><input type="text" class="input-cell"></td><td><input type="text" class="input-cell input-cell-right"></td><td><input type="text" class="input-cell input-cell-right"></td></tr>
+            
+            <!-- Vordefinierte Connect Zeilen -->
+            <tr><td><input type="text" class="input-cell" value="PESTCP" style="font-weight:bold;"></td><td><input type="text" class="input-cell"></td><td><input type="text" class="input-cell"></td><td><input type="text" class="input-cell"></td><td><input type="text" class="input-cell"></td><td><input type="text" class="input-cell input-cell-right"></td><td><input type="text" class="input-cell input-cell-right"></td></tr>
+            <tr><td><input type="text" class="input-cell" value="PESTCD" style="font-weight:bold;"></td><td><input type="text" class="input-cell"></td><td><input type="text" class="input-cell"></td><td><input type="text" class="input-cell"></td><td><input type="text" class="input-cell"></td><td><input type="text" class="input-cell input-cell-right"></td><td><input type="text" class="input-cell input-cell-right"></td></tr>
+            <tr><td><input type="text" class="input-cell" value="PESTCR" style="font-weight:bold;"></td><td><input type="text" class="input-cell"></td><td><input type="text" class="input-cell"></td><td><input type="text" class="input-cell"></td><td><input type="text" class="input-cell"></td><td><input type="text" class="input-cell input-cell-right"></td><td><input type="text" class="input-cell input-cell-right"></td></tr>
+            <tr><td><input type="text" class="input-cell" value="PESTC1" style="font-weight:bold;"></td><td><input type="text" class="input-cell"></td><td><input type="text" class="input-cell"></td><td><input type="text" class="input-cell"></td><td><input type="text" class="input-cell"></td><td><input type="text" class="input-cell input-cell-right"></td><td><input type="text" class="input-cell input-cell-right"></td></tr>
+            
+            <!-- Summen-Zeile -->
+            <tr class="total-row">
+                <td colspan="5" style="text-align:right; padding-right:10px;">Auftragswert Jahreswert gesamt lt. Preisliste und Auftragswert (4x3/6x3 und Standard):</td>
+                <td><input type="text" class="input-cell input-cell-right" value="0,00 €"></td>
+                <td><input type="text" class="input-cell input-cell-right" value="0,00 €"></td>
+            </tr>
+        </table>
+
+        <!-- KALKULATION SYSTEMEINRICHTUNG -->
+        <div class="red-header">Kalkulation Systemeinrichtung</div>
+        <table style="border:none;">
+            <tr>
+                <td style="border:none; text-align:left; width:30%;">Kalkulation Systemeinrichtung 4x3 / 6x3 (auch Kombi)<br>Sonderzeiten berücksichtigen<br>Z1 <input type="text" style="width:20px;"> Z2 <input type="text" style="width:20px;"></td>
+                <td style="border:none; width:20%;"><div style="border:1px solid #000; padding:5px;">Ergebnis von Jahreswert (Listenpreis) geteilt durch Anzahl möglicher Behandlungen</div></td>
+                <td style="border:none; width:10%; font-weight:bold;">x2 = </td>
+                <td style="border:none; width:20%;"><div style="border:1px solid #000; padding:5px; text-align:right;">Wert in € lt. Preisliste<br><b>0,00 €</b></div></td>
+                <td style="border:none; width:20%;"><div style="border:1px solid #000; padding:5px; text-align:right;">Auftragswert in €<br><b>0,00 €</b></div></td>
+            </tr>
+            <tr>
+                <td style="border:none; text-align:left;">Kalkulation Systemeinrichtung Standard-Vertrag<br>Sonderzeiten berücksichtigen<br>Z1 <input type="text" style="width:20px;"> Z2 <input type="text" style="width:20px;"></td>
+                <td style="border:none;"><div style="border:1px solid #000; padding:5px;">Wert in € pro Regelservice-Behandlung</div></td>
+                <td style="border:none; font-weight:bold;">x2 = </td>
+                <td style="border:none;"><div style="border:1px solid #000; padding:5px; text-align:right;">Wert in € lt. Preisliste<br><b>0,00 €</b></div></td>
+                <td style="border:none;"><div style="border:1px solid #000; padding:5px; text-align:right;">Auftragswert in €<br><b>0,00 €</b></div></td>
+            </tr>
+        </table>
+
+        <!-- KALKULATION JOBS -->
+        <div class="red-header">Kalkulation Jobs</div>
+        <table>
+            <tr>
+                <th style="width:10%;">Basis in Std.</th><th style="width:5%;">Z1</th><th style="width:5%;">Z2</th><th style="width:15%;">Zeit in €</th><th style="width:15%;">Präp.</th><th style="width:15%;">Zwischensumme</th><th style="width:5%;">Beh.</th><th style="width:15%;">Gesamt € lt. Preisliste</th><th style="width:15%;">Gesamt € Auftrag</th>
+            </tr>
+            <tr><td><input type="text" class="input-cell"></td><td><input type="text" class="input-cell"></td><td><input type="text" class="input-cell"></td><td><input type="text" class="input-cell"></td><td><input type="text" class="input-cell"></td><td><input type="text" class="input-cell"></td><td><input type="text" class="input-cell"></td><td><input type="text" class="input-cell input-cell-right"></td><td><input type="text" class="input-cell input-cell-right"></td></tr>
+            <tr><td><input type="text" class="input-cell"></td><td><input type="text" class="input-cell"></td><td><input type="text" class="input-cell"></td><td><input type="text" class="input-cell"></td><td><input type="text" class="input-cell"></td><td><input type="text" class="input-cell"></td><td><input type="text" class="input-cell"></td><td><input type="text" class="input-cell input-cell-right"></td><td><input type="text" class="input-cell input-cell-right"></td></tr>
+            <tr><td><input type="text" class="input-cell"></td><td><input type="text" class="input-cell"></td><td><input type="text" class="input-cell"></td><td><input type="text" class="input-cell"></td><td><input type="text" class="input-cell"></td><td><input type="text" class="input-cell"></td><td><input type="text" class="input-cell"></td><td><input type="text" class="input-cell input-cell-right"></td><td><input type="text" class="input-cell input-cell-right"></td></tr>
+            <tr><td><input type="text" class="input-cell"></td><td><input type="text" class="input-cell"></td><td><input type="text" class="input-cell"></td><td><input type="text" class="input-cell"></td><td><input type="text" class="input-cell"></td><td><input type="text" class="input-cell"></td><td><input type="text" class="input-cell"></td><td><input type="text" class="input-cell input-cell-right"></td><td><input type="text" class="input-cell input-cell-right"></td></tr>
+        </table>
+
+        <!-- SUMMEN UNTEN -->
+        <table style="border:none; text-align:right; font-weight:bold; margin-top:10px;">
+            <tr><td style="border:none; width:70%; color:#e30613;">Gesamt Jobs:</td><td style="border:none; width:15%; border-bottom:1px double #000;">0,00 €</td><td style="border:none; width:15%; border-bottom:1px double #000;">0,00 €</td></tr>
+            <tr><td style="border:none; color:#e30613;">Bereitstellungspauschale PestConnect:</td><td style="border:none; border-bottom:1px double #000;">0,00 €</td><td style="border:none; border-bottom:1px double #000;">0,00 €</td></tr>
+            <tr><td style="border:none; color:#e30613;">Produktverkauf:</td><td style="border:none; border-bottom:1px double #000;">0,00 €</td><td style="border:none; border-bottom:1px double #000;">0,00 €</td></tr>
+        </table>
+
+        <!-- BEGRÜNDUNG -->
+        <div style="border: 1px dashed #000; padding: 5px; margin-top: 15px; font-size: 9px;">
+            Begründung für Abweichungen (Jahreswert/Jobs/Systemeinrichtungen/Produktverkauf)<br>
+            JW % <input type="text" style="width:30px; border:none; border-bottom:1px solid #000; margin-right: 15px;">
+            Jobs % <input type="text" style="width:30px; border:none; border-bottom:1px solid #000; margin-right: 15px;">
+            SE % <input type="text" style="width:30px; border:none; border-bottom:1px solid #000; margin-right: 15px;">
+            PV % <input type="text" style="width:30px; border:none; border-bottom:1px solid #000;">
+        </div>
+
+        <!-- FOOTER UNTERSCHRIFTEN -->
+        <table style="border:none; margin-top:20px; width:100%; text-align:left;">
+            <tr>
+                <td style="border:none; border-top:1px solid #000; width:45%;">Datum/Unterschrift Verkaufsleiter/-in / Regionaler Verkaufsleiter/-in</td>
+                <td style="border:none; width:10%;"></td>
+                <td style="border:none; border-top:1px solid #000; width:45%;">Datum/Unterschrift Verkäufer/-in <span style="float:right;">Personalnummer: <input type="text" style="width:50px; border:none; border-bottom:1px solid #000;"></span></td>
+            </tr>
+        </table>
+        
+        <!-- ANFRAGEN-DETAILS -->
+        <table style="border:none; margin-top:20px; width:100%; text-align:center;">
+            <tr>
+                <td style="border:1px solid #000; padding:5px;">Anfragenummer<br><input type="text" class="input-cell"></td>
+                <td style="border:1px solid #000; padding:5px;">Geschäftsart<br><input type="text" class="input-cell"></td>
+                <td style="border:1px solid #000; padding:5px;">Anfrage<br><input type="checkbox"></td>
+                <td style="border:1px solid #000; padding:5px;">Neu<br><input type="checkbox"></td>
+                <td style="border:1px solid #000; padding:5px;">Sonstige<br><input type="checkbox"></td>
+                <td style="border:1px solid #000; padding:5px;">Empfehlung<br><input type="checkbox"></td>
+                <td style="border:1px solid #000; padding:5px; text-align:left;">Name Empfehlungsgeber/-in<br><input type="text" class="input-cell" style="text-align:left;"></td>
+            </tr>
+        </table>
+    </div>
+</body>
+</html>

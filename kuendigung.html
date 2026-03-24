@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <title>Kündigungsbearbeitung (RSI)</title>
+    <style>
+        body { margin: 0; font-family: Arial, sans-serif; background: #fff; }
+        
+        /* Striktes DIN A4 Maß gegen Stauchung */
+        .a4-page { width: 100%; max-width: 820px; min-height: 1160px; padding: 30px 45px; box-sizing: border-box; font-size: 9px; line-height: 1.2; color: #000; margin: 0 auto; position: relative; }
+        
+        /* Header */
+        .header-container { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 15px; border-bottom: 2px solid #e30613; padding-bottom: 5px; }
+        .header-title { font-size: 14px; font-weight: bold; margin: 0; }
+        .header-title span { font-size: 9px; font-weight: normal; margin-left: 10px; color: #555; }
+        .sv-logo { text-align: right; color: #e30613; font-size: 24px; font-weight: bold; letter-spacing: -1px; line-height: 0.9; }
+        .sv-logo span { display: block; font-size: 8px; color: #333; font-weight: normal; letter-spacing: 0; margin-top: 2px; }
+        
+        /* Allgemeine Tabellen */
+        table { width: 100%; border-collapse: collapse; margin-bottom: 15px; table-layout: fixed; }
+        th, td { border: 1px solid #000; padding: 4px; vertical-align: middle; }
+        .no-border { border: none !important; }
+        .t-input { width: 100%; border: none; background: transparent; font-size: 9px; font-family: inherit; outline: none; }
+        .t-input-right { text-align: right; font-weight: bold; }
+        
+        /* Farbcodes aus dem Original */
+        .bg-blue { background-color: #a4c2f4; }
+        .bg-green { background-color: #b6d7a8; }
+        .bg-yellow { background-color: #ffe599; font-weight: bold; }
+        .bg-grey { background-color: #f4f4f4; }
+        .bg-red-light { background-color: #f4cccc; }
+        
+        /* Sektions-Titel */
+        .section-title { font-weight: bold; font-size: 10px; margin-bottom: 5px; color: #e30613; }
+        
+        /* Struktur der Angebots-Zeilen */
+        .offer-col-1 { width: 3%; text-align: center; font-weight: bold; background: #e0e0e0; writing-mode: vertical-rl; transform: rotate(180deg); }
+        .offer-col-2 { width: 4%; text-align: center; font-weight: bold; background: #f4f4f4; }
+        .offer-col-main { width: 83%; padding: 0 !important; }
+        .offer-col-wertung { width: 10%; text-align: center; font-weight: bold; }
+        
+        .inner-table { width: 100%; border-collapse: collapse; }
+        .inner-table td { border: none; border-bottom: 1px solid #000; padding: 3px 5px; }
+        .inner-table tr:last-child td { border-bottom: none; }
+        .inner-table td:last-child { border-left: 1px solid #000; width: 15%; text-align: right; }
+        
+        .desc-text { padding: 5px; border-bottom: 1px solid #000; }
+        .desc-title { font-weight: bold; margin-bottom: 2px; }
+        .desc-prov { font-weight: bold; margin-top: 2px; display: inline-block; }
+        
+        /* Unterschriften */
+        .sig-container { display: flex; justify-content: space-between; margin-top: 20px; border-top: 1px solid #000; padding-top: 5px; }
+        .sig-block { width: 45%; font-size: 8px; }
+    </style>
+</head>
+<body>
+    <div class="a4-page">
+        <!-- HEADER -->
+        <div class="header-container">
+            <div class="header-title">Berechnung zur Kündigungsbearbeitung <span>Stand: März 2022</span></div>
+            <div class="sv-logo">Rentokil<span>Die Schädlingsexperten</span></div>
+        </div>
+
+        <div style="display:flex; justify-content:space-between; margin-bottom:2px; font-weight:bold; font-size:10px;">
+            <div>Kundendaten</div>
+            <div style="margin-right: 120px;">Datum: <input type="text" class="t-input" style="width: 80px; display:inline; border-bottom:1px dotted #000;"></div>
+        </div>
+
+        <!-- STAMMDATEN ALTVERTRAG -->
+        <table>
+            <tr>
+                <td rowspan="8" style="width: 5%; writing-mode: vertical-rl; transform: rotate(180deg); text-align: center; font-weight: bold; background: #f4f4f4;">Stammdaten</td>
+                <td style="width: 45%; font-weight:bold;">Kundenname:</td>
+                <td class="bg-blue" style="width: 40%;"><input type="text" class="t-input"></td>
+                <td rowspan="4" style="width: 10%; text-align: center; font-size: 8px; background: #fff;">Zutreffendes<br>Ankreuzen</td>
+            </tr>
+            <tr><td style="font-weight:bold;">Vertragsnummer aus ICabs:</td><td class="bg-blue"><input type="text" class="t-input"></td></tr>
+            <tr><td style="font-weight:bold;">Serviceanschrift aus ICabs:</td><td class="bg-blue"><input type="text" class="t-input"></td></tr>
+            <tr><td style="font-weight:bold;">Beginndatum des Vertrags:</td><td class="bg-blue"><input type="text" class="t-input"></td></tr>
+            <tr><td style="font-weight:bold;">Jahreswert in Euro aus ICabs:</td><td class="bg-blue"><input type="text" class="t-input t-input-right" placeholder="0,00 €"></td><td rowspan="4" class="bg-grey"></td></tr>
+            <tr><td style="font-weight:bold;">Behandlungsanzahl aus ICabs:</td><td class="bg-blue"><input type="text" class="t-input t-input-right" placeholder="0"></td></tr>
+            <tr><td style="font-weight:bold;">Gesamtminuten der letzten 4 Regelservicebehandlungen aus ICabs:</td><td class="bg-blue"><input type="text" class="t-input t-input-right" placeholder="0"></td></tr>
+            <tr><td style="font-weight:bold;">Anzahl der Kontrollpunkte IST:</td><td class="bg-blue"><input type="text" class="t-input t-input-right" placeholder="0"></td></tr>
+            <tr><td class="no-border"></td><td style="font-weight:bold;">Gesamtminuten zzgl. Kalkulatorisch 10% Servicezeit:</td><td class="bg-green"><input type="text" class="t-input t-input-right" placeholder="0,0"></td><td class="no-border"></td></tr>
+            <tr><td class="no-border"></td><td style="font-weight:bold;">Altvertrag Behandlungswert:</td><td class="bg-green"><input type="text" class="t-input t-input-right" placeholder="0,00 €"></td><td class="no-border"></td></tr>
+            <tr><td class="no-border"></td><td style="font-weight:bold;">Produktivität / Std. des Altvertrages je Service:</td><td class="bg-green"><input type="text" class="t-input t-input-right" placeholder="0,00 €"></td><td class="no-border"></td></tr>
+        </table>
+
+        <!-- 1. SCHÄDLINGSBEKÄMPFUNG -->
+        <div class="section-title" style="color:#000;">1. Schädlingsbekämpfung Service ( keine LED/UV Wartung, Miete oder PestConnect )</div>
+        
+        <!-- 1.1 -->
+        <table>
+            <tr>
+                <td class="offer-col-1" rowspan="2">Angebot</td>
+                <td class="offer-col-2">1.1</td>
+                <td class="offer-col-main">
+                    <div class="desc-text">
+                        <div class="desc-title">"Gleicher / erhöhter Service Umfang, reduzierte / gleiche / erhöhte Behandlungsanzahl, gleicher / erhöhter Behandlungswert"</div>
+                        Produktivität ohne Veränderung zu Altvertag, Produktivität mindestens 130 Euro Std / je Service.<br>
+                        <span class="desc-prov">Kategorie gleiche Produktivität (8% Provision)</span>
+                    </div>
+                    <table class="inner-table">
+                        <tr><td>Neuvertrag Anzahl der Kontrollpunkte:</td><td class="bg-blue"><input type="text" class="t-input t-input-right"></td></tr>
+                        <tr><td>Produktivität / Std. des Neuvertrags mindestens:</td><td class="bg-green"><input type="text" class="t-input t-input-right"></td></tr>
+                        <tr><td>Behandlungswert des Neuvertrages mindestens:</td><td class="bg-green"><input type="text" class="t-input t-input-right" placeholder="0,00 €"></td></tr>
+                        <tr><td>Anzahl der neu vereinbarten Regelservicebehandlungen pro Vertragsjahr:</td><td class="bg-blue"><input type="text" class="t-input t-input-right"></td></tr>
+                        <tr><td style="font-weight:bold;">Jahreswert des Neuvertrags mindestens:</td><td class="bg-yellow"><input type="text" class="t-input t-input-right" style="font-weight:bold;" placeholder="0,00 €"></td></tr>
+                    </table>
+                </td>
+                <td class="offer-col-wertung">Wertung<br><br><input type="checkbox"></td>
+            </tr>
+        </table>
+
+        <!-- 1.2 -->
+        <table>
+            <tr>
+                <td class="offer-col-1" rowspan="2">Angebot</td>
+                <td class="offer-col-2">1.2</td>
+                <td class="offer-col-main">
+                    <div class="desc-text">
+                        <div class="desc-title">"Geminderter Service Umfang, reduzierte / gleiche / erhöhte Behandlungsanzahl, reduzierter Behandlungswert"</div>
+                        Mindestreduzierung der Kontrollpunkte um 15%, anteilige Reduzierung des Behandlungswertes, mindestens 100 Euro Behandlungswert und Produktivität mindestens 130 Euro Std / je Service.<br>
+                        <span class="desc-prov">Kategorie gleiche Produktivität (8% Provision)</span>
+                    </div>
+                    <table class="inner-table">
+                        <tr><td>Neuvertrag Anzahl der Kontrollpunkte:</td><td class="bg-blue"><input type="text" class="t-input t-input-right"></td></tr>
+                        <tr><td>Neue Behandlungszeit in Minuten:</td><td class="bg-blue"><input type="text" class="t-input t-input-right"></td></tr>
+                        <tr><td>Behandlungswert des Neuvertrages je Service:</td><td class="bg-green"><input type="text" class="t-input t-input-right" placeholder="0,00 €"></td></tr>
+                        <tr><td>Anzahl der neu vereinbarten Regelservicebehandlungen pro Vertragsjahr:</td><td class="bg-blue"><input type="text" class="t-input t-input-right"></td></tr>
+                        <tr><td style="font-weight:bold;">Jahreswert des Neuvertrags mindestens:</td><td class="bg-yellow"><input type="text" class="t-input t-input-right" style="font-weight:bold;" placeholder="0,00 €"></td></tr>
+                    </table>
+                </td>
+                <td class="offer-col-wertung">Wertung<br><br><input type="checkbox"></td>
+            </tr>
+        </table>
+
+        <!-- 1.3 -->
+        <table>
+            <tr>
+                <td class="offer-col-1" rowspan="2">Angebot</td>
+                <td class="offer-col-2">1.3</td>
+                <td class="offer-col-main">
+                    <div class="desc-text">
+                        <div class="desc-title">"Gleicher Service Umfang, reduzierte / gleiche / erhöhte Behandlungsanzahl, reduzierter Behandlungswert"</div>
+                        Produktivität /Std. je Service maximal -15% zu Altvertag, mindestens jedoch 130 Euro / Std. je Service, mindestens 100 Euro Behandlungswert.<br>
+                        <span class="desc-prov">Kategorie geminderte Produktivität (6% Provision)</span>
+                    </div>
+                    <table class="inner-table">
+                        <tr><td>Produktivität / Std. des Neuvertrags mindestens:</td><td class="bg-green"><input type="text" class="t-input t-input-right"></td></tr>
+                        <tr><td>Behandlungswert des Neuvertrages mindestens:</td><td class="bg-green"><input type="text" class="t-input t-input-right" placeholder="0,00 €"></td></tr>
+                        <tr><td>Anzahl der neu vereinbarten Regelservicebehandlungen pro Vertragsjahr:</td><td class="bg-blue"><input type="text" class="t-input t-input-right"></td></tr>
+                        <tr><td style="font-weight:bold;">Jahreswert des Neuvertrags mindestens:</td><td class="bg-yellow"><input type="text" class="t-input t-input-right" style="font-weight:bold;" placeholder="0,00 €"></td></tr>
+                    </table>
+                </td>
+                <td class="offer-col-wertung">Wertung<br><br><input type="checkbox"></td>
+            </tr>
+        </table>
+
+        <!-- 1.4 -->
+        <table>
+            <tr>
+                <td class="offer-col-1" rowspan="2">Angebot</td>
+                <td class="offer-col-2">1.4</td>
+                <td class="offer-col-main">
+                    <div class="desc-text">
+                        <div class="desc-title">"Gleicher Service Umfang, reduzierte Behandlungsanzahl, erhöhter Behandlungswert"</div>
+                        Produktivität /Std. je Service mindestens +10% zu Altvertag, mindestens jedoch 130 Euro /Std. je Service.<br>
+                        <span class="desc-prov">Kategorie gesteigerte Produktivität (9% Provision)</span>
+                    </div>
+                    <table class="inner-table">
+                        <tr><td>Produktivität / Std. des Neuvertrags mindestens:</td><td class="bg-green"><input type="text" class="t-input t-input-right"></td></tr>
+                        <tr><td>Behandlungswert des Neuvertrages mindestens:</td><td class="bg-green"><input type="text" class="t-input t-input-right" placeholder="0,00 €"></td></tr>
+                        <tr><td>Anzahl der neu vereinbarten Regelservicebehandlungen pro Vertragsjahr:</td><td class="bg-blue"><input type="text" class="t-input t-input-right"></td></tr>
+                        <tr><td style="font-weight:bold;">Jahreswert des Neuvertrags mindestens:</td><td class="bg-yellow"><input type="text" class="t-input t-input-right" style="font-weight:bold;" placeholder="0,00 €"></td></tr>
+                    </table>
+                </td>
+                <td class="offer-col-wertung">Wertung<br><br><input type="checkbox"></td>
+            </tr>
+        </table>
+
+        <!-- 2. PESTCONNECT -->
+        <div class="section-title" style="margin-top: 15px; color:#000;">2. PestConnect</div>
+        <table>
+            <tr>
+                <td class="offer-col-1" style="background: #e0e0e0;">Bestandsvertrag</td>
+                <td class="offer-col-2">2.1</td>
+                <td class="offer-col-main bg-red-light" style="padding: 5px !important;">
+                    <div class="desc-title">Umwandlung in PestConnect Verträge</div>
+                    Kalkulation gemäß PestConnect Kalkulator<br>
+                    <span class="desc-prov">Kategorie gesteigerte Produktivität (9% Provision)</span><br><br>
+                    Standart PestConnect Kalkulation<br>
+                    <strong>Kalkulationsblatt des PestConnect Kalkulators beifügen</strong>
+                </td>
+                <td class="offer-col-wertung">Wertung<br><br><input type="checkbox"></td>
+            </tr>
+            <tr>
+                <td class="offer-col-1" style="background: #e0e0e0;">Bestandsvertrag</td>
+                <td class="offer-col-2">2.2</td>
+                <td class="offer-col-main bg-red-light" style="padding: 5px !important;">
+                    <div class="desc-title">PestConnect Vertrag bleibt PestConnect Vertrag</div>
+                    "Gleicher Service Umfang, reduzierte Behandlungsanzahl"<br>
+                    <span class="desc-prov">Kategorie gleiche Produktivität (8% Provision)</span><br><br>
+                    PestConnect Kalkulation, Behandlungswert neu muss höher sein als Behandlungswert Altvertrag<br>
+                    <strong>Kalkulationsblatt des PestConnect Kalkulators beifügen</strong>
+                </td>
+                <td class="offer-col-wertung">Wertung<br><br><input type="checkbox"></td>
+            </tr>
+            <tr>
+                <td class="offer-col-1" style="background: #e0e0e0;">Bestandsvertrag</td>
+                <td class="offer-col-2">2.3</td>
+                <td class="offer-col-main bg-red-light" style="padding: 5px !important;">
+                    <div class="desc-title">PestConnect Vertrag bleibt PestConnect Vertrag</div>
+                    "Gleicher Service Umfang, gleiche Behandlungsanzahl, reduzierter Behandlungswert"<br>
+                    <span class="desc-prov">Kategorie geminderte Produktivität (6% Provision)</span><br><br>
+                    PestConnect Kalkulation mit 5% Rabatt auf den Jahreswert zzgl. max. 5% Kundenrückgewinnungsrabatt.<br>
+                    <strong>Kalkulationsblatt des PestConnect Kalkulators beifügen.</strong>
+                </td>
+                <td class="offer-col-wertung">Wertung<br><br><input type="checkbox"></td>
+            </tr>
+        </table>
+
+        <!-- FOOTER UNTERSCHRIFTEN -->
+        <div class="sig-container">
+            <div class="sig-block">Datum Unterschrift Fachberater (m/w/d)</div>
+            <div class="sig-block" style="text-align: right;">Datum Unterschrift Regional Verkaufsleiter (m/w/d)</div>
+        </div>
+    </div>
+</body>
+</html>

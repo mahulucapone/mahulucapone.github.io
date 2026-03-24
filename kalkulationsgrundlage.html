@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <title>Kalkulationsgrundlage (Audit-Trail)</title>
+    <style>
+        body { margin: 0; font-family: monospace; background: #fff; }
+        .a4-container { width: 100%; min-height: 1160px; padding: 50px; box-sizing: border-box; font-size: 10px; color: #333; }
+        .header { border-bottom: 2px solid #000; padding-bottom: 10px; margin-bottom: 20px; }
+        .title { font-size: 16px; font-weight: bold; color: #000; text-transform: uppercase; }
+        .timestamp { font-size: 10px; color: #888; margin-top: 5px; }
+        .data-table { width: 100%; border-collapse: collapse; margin-bottom: 20px; }
+        .data-table th, .data-table td { border: 1px solid #ddd; padding: 6px; text-align: left; }
+        .data-table th { background: #f4f4f4; font-weight: bold; }
+    </style>
+</head>
+<body>
+    <div class="a4-container">
+        <div class="header">
+            <div class="title">Kalkulationsgrundlage & Preis-Cockpit (Audit-Trail)</div>
+            <div class="timestamp">Stand: <script>document.write(new Date().toLocaleDateString());</script> - Preisliste V1</div>
+        </div>
+
+        <div style="margin-bottom: 10px; font-weight: bold;">1. Verwendete Basis-Parameter & Zuschläge</div>
+        <table class="data-table">
+            <tr><th>Parameter</th><th>Hinterlegter Wert</th><th>Referenz</th></tr>
+            <tr><td>Stundenproduktivität (Basis)</td><td>130,00 € / Std.</td><td>Mindestvorgabe</td></tr>
+            <tr><td>Z1 Zuschlag</td><td>+ 50 %</td><td>Kalkulationsmatrix</td></tr>
+            <tr><td>Z2 Zuschlag</td><td>+ 100 %</td><td>Kalkulationsmatrix</td></tr>
+            <tr><td>Systemeinrichtung Standard</td><td>20 % vom Jahreswert</td><td>Sektion 3</td></tr>
+            <tr><td>Laufzeitaufschlag (24 Monate)</td><td>+ 6 %</td><td>Sektion 4</td></tr>
+            <tr><td>Laufzeitaufschlag (12 Monate)</td><td>+ 12 %</td><td>Sektion 4</td></tr>
+        </table>
+
+        <div style="margin-bottom: 10px; font-weight: bold;">2. Hardware- & Bereitstellungskosten (PestConnect)</div>
+        <table class="data-table">
+            <tr><th>Produkt</th><th>Verlust/Vandalismus Gebühr</th><th>Zusatzinfo</th></tr>
+            <tr><td>PestConnect Router</td><td>289,00 €</td><td>KMB 14</td></tr>
+            <tr><td>Dual AutoGate</td><td>139,00 €</td><td>KMB 14</td></tr>
+            <tr><td>RADAR X / Optix-Kamera</td><td>139,00 €</td><td>KMB 14</td></tr>
+            <tr><td>Schadnagerstation RKP</td><td>30,00 €</td><td>Standard</td></tr>
+        </table>
+
+        <div style="font-size:8px; color:#777; margin-top:30px; border-top:1px solid #ccc; padding-top:10px;">
+            Dieses Dokument listet alle Formeln und Parameter auf, die exakt zu diesem Angebot geführt haben. Es dient ausschließlich der internen Nachvollziehbarkeit und Prüfung.
+        </div>
+    </div>
+</body>
+</html>
