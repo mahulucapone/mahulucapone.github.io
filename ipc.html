@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <title>IPC und CEPA</title>
+    <style>
+        body { margin: 0; font-family: Arial, sans-serif; background: #fff; }
+        .a4-page { width: 100%; max-width: 820px; min-height: 1160px; padding: 40px 45px; box-sizing: border-box; font-size: 9px; line-height: 1.2; color: #000; margin: 0 auto; position: relative; display: block; }
+        
+        /* Header */
+        .header-container { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 15px; }
+        .header-title { color: #e30613; font-size: 24px; font-weight: bold; margin: 0; letter-spacing: -0.5px; }
+        .sv-logo { text-align: right; color: #e30613; font-size: 24px; font-weight: bold; line-height: 0.9; letter-spacing: -1px; }
+        .sv-logo span { display: block; font-size: 8px; color: #333; font-weight: normal; letter-spacing: 0; margin-top: 2px; }
+        
+        .header-inputs { display: flex; justify-content: space-between; font-size: 10px; font-weight: bold; margin-bottom: 5px; }
+        .dotted-input { border: none; border-bottom: 1px dotted #000; font-size: 9px; outline: none; background: transparent; font-family: inherit; padding-bottom: 1px; }
+        
+        .section-title { font-weight: bold; color: #000; font-size: 13px; margin: 10px 0 5px 0; }
+        .section-title-red { font-weight: bold; color: #e30613; font-size: 13px; margin: 15px 0 5px 0; }
+        
+        /* Grid Layouts für CEPA */
+        .col-title { font-weight: bold; font-size: 8px; margin-bottom: 5px; color: #555; }
+        .checkbox-list { display: flex; flex-direction: column; gap: 3px; font-size: 8px; }
+        .checkbox-list label { display: flex; align-items: center; gap: 3px; cursor: pointer; }
+        .checkbox-list input[type="checkbox"] { margin: 0; width: 10px; height: 10px; }
+        
+        .cepa-row { display: flex; gap: 15px; margin-bottom: 10px; }
+        .cepa-col-1 { width: 22%; }
+        .cepa-col-2 { width: 48%; display: flex; gap: 10px; }
+        .cepa-col-3 { width: 30%; }
+        
+        .befall-matrix { display: flex; flex-direction: column; gap: 3px; width: 100%; }
+        .befall-row { display: flex; justify-content: space-between; align-items: center; font-size: 8px; }
+        .befall-checks { display: flex; gap: 5px; }
+        
+        /* Pest Connect Checkliste */
+        .pc-grid { display: flex; gap: 30px; margin-bottom: 15px; font-size: 8px; }
+        .pc-col { flex: 1; display: flex; flex-direction: column; gap: 4px; }
+        .pc-item { display: flex; justify-content: space-between; align-items: flex-end; }
+        
+        /* Instruktionen Bereich */
+        .instr-grid { display: flex; gap: 15px; margin-top: 10px; }
+        .instr-col { flex: 1; display: flex; flex-direction: column; }
+        .instr-textarea { flex-grow: 1; border: 1px solid #ccc; padding: 5px; font-family: inherit; font-size: 9px; resize: none; min-height: 180px; }
+        
+        .dashed-line { border-bottom: 1px dashed #ccc; margin: 10px 0; }
+    </style>
+</head>
+<body>
+    <div class="a4-page">
+        <!-- HEADER -->
+        <div class="header-container">
+            <div class="header-title">IPC und CEPA</div>
+            <div class="sv-logo">Rentokil<span>Die Schädlingsexperten</span></div>
+        </div>
+
+        <div class="header-inputs">
+            <div style="width: 40%;">Datum: <input type="text" class="dotted-input" id="ipc-datum" style="width: 70%;"></div>
+            <div style="width: 55%;">Kunde: <input type="text" class="dotted-input" id="ipc-kunde" style="width: 80%;"></div>
+        </div>
+
+        <!-- CEPA RISIKOBEURTEILUNG -->
+        <div class="section-title">CEPA-Risikobeurteilung zu DIN EN 16636</div>
+        
+        <div class="cepa-row">
+            <div class="cepa-col-1">
+                <div class="col-title">Branche</div>
+                <div class="checkbox-list">
+                    <label><input type="checkbox"> Lebensmittel verarbeitend,<br>verpackend oder lagernd</label>
+                    <label><input type="checkbox"> Pharmazie</label>
+                    <label><input type="checkbox"> Gemeinschaftseinrichtung</label>
+                    <label><input type="checkbox"> Privatkunde</label>
+                    <label><input type="checkbox"> Sonstiges: <input type="text" class="dotted-input" style="width:50px;"></label>
+                </div>
+            </div>
+            <div class="cepa-col-2">
+                <div style="width:35%;">
+                    <div class="col-title">Im Angebot berück. Schädlinge</div>
+                    <div class="checkbox-list" style="margin-top:2px;">
+                        <label><input type="checkbox" id="cepa-ziel-nager"> Nager</label>
+                        <label><input type="checkbox" id="cepa-ziel-kriech"> kriechende Insekten</label>
+                        <label><input type="checkbox"> fliegende Insekten</label>
+                        <label><input type="checkbox"> Vögel</label>
+                        <label><input type="checkbox"> Sonstiges:</label>
+                    </div>
+                </div>
+                <div style="width:65%;">
+                    <div class="col-title">Befall/Befallsgefahr für Schädlinge</div>
+                    <div class="befall-matrix">
+                        <div class="befall-row"><div class="befall-checks"><label><input type="checkbox"> kein</label><label><input type="checkbox"> leicht</label><label><input type="checkbox"> mittel</label><label><input type="checkbox"> stark</label></div></div>
+                        <div class="befall-row"><div class="befall-checks"><label><input type="checkbox"> kein</label><label><input type="checkbox"> leicht</label><label><input type="checkbox"> mittel</label><label><input type="checkbox"> stark</label></div></div>
+                        <div class="befall-row"><div class="befall-checks"><label><input type="checkbox"> kein</label><label><input type="checkbox"> leicht</label><label><input type="checkbox"> mittel</label><label><input type="checkbox"> stark</label></div></div>
+                        <div class="befall-row"><div class="befall-checks"><label><input type="checkbox"> kein</label><label><input type="checkbox"> leicht</label><label><input type="checkbox"> mittel</label><label><input type="checkbox"> stark</label></div></div>
+                        <div class="befall-row"><div class="befall-checks"><label><input type="checkbox"> kein</label><label><input type="checkbox"> leicht</label><label><input type="checkbox"> mittel</label><label><input type="checkbox"> stark</label></div></div>
+                    </div>
+                </div>
+            </div>
+            <div class="cepa-col-3">
+                <div class="col-title">Befall erkannt durch:</div>
+                <div class="checkbox-list">
+                    <label><input type="checkbox" id="cepa-lebende"> Lebende Schadorganismen</label>
+                    <label><input type="checkbox" id="cepa-tote"> Tote Schadorganismen</label>
+                    <label><input type="checkbox" id="cepa-spuren"> Spuren</label>
+                    <label><input type="checkbox"> Befallsorte bei aktivem Befall:</label>
+                    <input type="text" class="dotted-input" style="width:100%; margin-top:2px;">
+                </div>
+            </div>
+        </div>
+
+        <div class="cepa-row">
+            <div style="width: 22%;">
+                <div class="col-title">Besondere Gefahren Umfeld</div>
+                <div class="checkbox-list">
+                    <label><input type="checkbox"> Wälder</label>
+                    <label><input type="checkbox"> Gewässer</label>
+                    <label><input type="checkbox"> Deponie</label>
+                    <label><input type="checkbox"> Sonstiges: <input type="text" class="dotted-input" style="width:40px;"></label>
+                </div>
+            </div>
+            <div style="width: 22%;">
+                <div class="col-title">Besondere Gefahren Lager</div>
+                <div class="checkbox-list">
+                    <label><input type="checkbox" id="cepa-unordentlich"> Bereich unordentlich</label>
+                    <label><input type="checkbox"> Lagergut an Wänden</label>
+                    <label><input type="checkbox"> Roh-/Fertigware</label>
+                    <label><input type="checkbox"> Sonstiges: <input type="text" class="dotted-input" style="width:40px;"></label>
+                </div>
+            </div>
+            <div style="width: 56%;">
+                <div class="col-title">Absicherung</div>
+                <div style="display:flex; gap:15px;">
+                    <div class="checkbox-list" style="flex:1;">
+                        <label><input type="checkbox"> Abflussrinne/Gully</label>
+                        <label><input type="checkbox"> Boden defekt</label>
+                        <label><input type="checkbox"> Dehnungsfugen</label>
+                        <label><input type="checkbox" id="cepa-fenster"> Fenster defekt</label>
+                    </div>
+                    <div class="checkbox-list" style="flex:1;">
+                        <label><input type="checkbox"> Fliesen defekt</label>
+                        <label><input type="checkbox"> Oberlichter</label>
+                        <label><input type="checkbox" id="cepa-rohr"> Rohrdurchbrüche</label>
+                        <label><input type="checkbox" id="cepa-tuer"> Tür undicht</label>
+                    </div>
+                    <div class="checkbox-list" style="flex:1;">
+                        <label><input type="checkbox"> Sonstiges: <input type="text" class="dotted-input"></label>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-title" style="margin-top:5px;">Hygiene/Reinigung</div>
+        <div style="display:flex; gap:15px;">
+            <div class="checkbox-list" style="flex:1;">
+                <label><input type="checkbox" id="cepa-abfall"> Abfälle</label>
+                <label><input type="checkbox"> Abfallcontainer</label>
+                <label><input type="checkbox"> Abfluss</label>
+            </div>
+            <div class="checkbox-list" style="flex:1;">
+                <label><input type="checkbox"> Insekten - Kadaver</label>
+                <label><input type="checkbox"> Schimmelbefall</label>
+                <label><input type="checkbox"> Staubbelastung</label>
+            </div>
+            <div class="checkbox-list" style="flex:1;">
+                <label><input type="checkbox"> stehendes Wasser</label>
+                <label><input type="checkbox"> Vogelkot</label>
+                <label><input type="checkbox"> Vogelnester</label>
+            </div>
+            <div class="checkbox-list" style="flex:1;">
+                <label><input type="checkbox" id="cepa-reinigung"> Generelle Reinigung</label>
+            </div>
+        </div>
+        <div style="margin-top:5px; font-size:8px;">Sonstiges: <input type="text" class="dotted-input" style="width: 80%;"></div>
+
+        <div class="dashed-line"></div>
+
+        <!-- PEST CONNECT CHECKLISTE -->
+        <div class="section-title">Pest Connect Checkliste</div>
+        <div class="pc-grid">
+            <div class="pc-col">
+                <div class="pc-item"><span>Vodafone Empfang:</span> <input type="checkbox"></div>
+                <div class="pc-item"><span>Alternativanbieter:</span> <span><input type="checkbox"> Alternative: <input type="text" class="dotted-input" style="width:80px;"></span></div>
+                <div class="pc-item"><span>Grundrisspläne vorhanden:</span> <span><input type="checkbox"> Anzahl: <input type="text" class="dotted-input" style="width:80px;"></span></div>
+                <div class="pc-item"><span>Dauerstrom für Router verfügbar:</span> <input type="checkbox"></div>
+                <div class="pc-item"><span>Steckdose(n) vorhanden:</span> <span><input type="checkbox"> Anzahl: <input type="text" class="dotted-input" style="width:80px;"></span></div>
+                <div class="pc-item"><span>zusätzliche Steckdose(n) notwendig:</span> <span><input type="checkbox"> Anzahl: <input type="text" class="dotted-input" style="width:80px;"></span></div>
+                <div class="pc-item"><span>Haustechniker = Ansprechpartner Service:</span> <span><input type="checkbox"> Wenn nein, NAME: <input type="text" class="dotted-input" style="width:80px;"></span></div>
+                <div class="pc-item"><span>EX-Bereiche vorhanden:</span> <span><input type="checkbox"> Welche: <input type="text" class="dotted-input" style="width:80px;"></span></div>
+                <div class="pc-item"><span>Abgeschirmte Bereiche:</span> <span><input type="checkbox"> Welche: <input type="text" class="dotted-input" style="width:80px;"></span></div>
+                
+                <div style="margin-top:10px;">myRentokil Kontaktdaten Kunde:</div>
+                <div class="pc-item"><span>Ansprechpartner Vorname, Name:</span> <input type="text" class="dotted-input" style="width:150px;"></div>
+                <div class="pc-item"><span>Ansprechpartner Telefon:</span> <input type="text" class="dotted-input" style="width:150px;"></div>
+                <div class="pc-item"><span>Ansprechpartner Email:</span> <input type="text" class="dotted-input" style="width:150px;"></div>
+            </div>
+            <div class="pc-col">
+                <div class="pc-item"><span>Hohe Feuchtigkeitsbelastung:</span> <input type="checkbox"></div>
+                <div class="pc-item"><span>Hohe Staubbelastung:</span> <input type="checkbox"></div>
+                <div class="pc-item"><span>Brandschutztüren:</span> <input type="checkbox"></div>
+                <div class="pc-item"><span>Beton/Massives Mauerwerk:</span> <input type="checkbox"></div>
+                <div class="pc-item"><span>Flüssigkeiten/Gas:</span> <input type="checkbox"></div>
+                <div class="pc-item"><span>zusätzliche Steckdose(n) notwendig:</span> <input type="checkbox"></div>
+                <div class="pc-item"><span>Haustechniker = Ansprechpartner Service:</span> <input type="checkbox"></div>
+                <div class="pc-item"><span>Dicht gepackte Ware:</span> <input type="checkbox"></div>
+                
+                <div style="margin-top:23px;">Befestigung der Stationen:</div>
+                <div class="pc-item"><span>RADAR X Connect:</span> <input type="text" class="dotted-input" style="width:150px;"></div>
+                <div class="pc-item"><span>Optix:</span> <input type="text" class="dotted-input" style="width:150px;"></div>
+                <div class="pc-item"><span>Dual AutoGate Connect:</span> <input type="text" class="dotted-input" style="width:150px;"></div>
+            </div>
+        </div>
+
+        <div class="dashed-line"></div>
+
+        <!-- IPC INSTRUKTIONEN -->
+        <div class="section-title-red">IPC Instruktionen-Präparate-Kalkulation</div>
+        <div style="display:flex; align-items:center; gap:10px; font-size:9px; margin-bottom:8px;">
+            <span style="font-weight:bold;">Arbeitszeit:</span>
+            <span>Werktags zwischen</span>
+            <label style="display:flex; align-items:center; gap:2px;"><input type="checkbox"> 5-7 Uhr</label>
+            <label style="display:flex; align-items:center; gap:2px;"><input type="checkbox"> 7-18 Uhr</label>
+            <label style="display:flex; align-items:center; gap:2px;"><input type="checkbox"> 18-22 Uhr</label>
+            <span>Restliche Arbeitszeit bzw. Sonn- und Feiertage <input type="text" class="dotted-input" style="width:100px;"></span>
+        </div>
+        <div style="display:flex; align-items:center; gap:10px; font-size:9px; margin-bottom:8px;">
+            <span style="font-weight:bold;">Dauer</span>
+            <label style="display:flex; align-items:center; gap:2px;">GB <input type="text" style="width:30px; border:1px solid #000;"></label>
+            <label style="display:flex; align-items:center; gap:2px;">CallOut <input type="text" style="width:30px; border:1px solid #000;"></label>
+            <label style="display:flex; align-items:center; gap:2px;">RS <input type="text" style="width:30px; border:1px solid #000;"></label>
+            <label style="display:flex; align-items:center; gap:2px;">Job <input type="text" style="width:60px; border:1px solid #000;"></label>
+            <label style="display:flex; align-items:center; gap:2px;">mal <input type="text" style="width:60px; border:1px solid #000;"> Stunden</label>
+        </div>
+        <div style="display:flex; align-items:center; gap:10px; font-size:9px; margin-bottom:10px;">
+            <span style="font-weight:bold;">Terminwunsch</span>
+            <span>Datum: <input type="text" class="dotted-input" style="width:80px;"></span>
+            <span>Uhrzeit: <input type="text" class="dotted-input" style="width:80px;"></span>
+            <span>Techniker: <input type="text" class="dotted-input" style="width:120px;"></span>
+        </div>
+
+        <div style="margin-bottom:5px;"><label style="display:flex; align-items:center; gap:5px; font-weight:bold; font-size:9px;"><input type="checkbox"> Servicemittel befestigen</label></div>
+        
+        <div class="instr-grid">
+            <div class="instr-col">
+                <label style="display:flex; align-items:center; gap:5px; font-weight:bold; font-size:9px; margin-bottom:5px;"><input type="checkbox"> Standardvertrag Befallssituation/Servicemittel/Absprachen</label>
+                <textarea class="instr-textarea"></textarea>
+            </div>
+            <div class="instr-col" style="border-left: 2px solid #000; padding-left: 15px;">
+                <label style="display:flex; align-items:center; gap:5px; font-weight:bold; font-size:9px; margin-bottom:10px;"><input type="checkbox" checked> 4x3/6x3 Vertrag/Baustein</label>
+                <div style="font-size:8px; line-height:1.4;">
+                    <strong>Hallo Kollegin, Hallo Kollege, dieser Vertrag beinhaltet 4x3/6x3.</strong><br><br>
+                    <label style="display:flex; align-items:flex-start; gap:4px; margin-bottom:4px;"><input type="checkbox" style="margin-top:1px;"> Ich habe bei der Inspektion keinen Befall festgestellt. Bitte richte mit Non Tox ein. Solltest Du jedoch Befall feststellen: bitte setze Tox in den befallenen Bereichen ein. Diese habe ich links im Textfeld aufgeführt.</label>
+                    <label style="display:flex; align-items:flex-start; gap:4px; margin-bottom:10px;"><input type="checkbox" style="margin-top:1px;"> Es wurde vorab ein Job verkauft: Bitte setze Tox in den Befallsbereichen ein. Diese habe ich links im Textfeld aufgeführt.</label>
+                    <strong>ACHTUNG:</strong> Für alle weiteren Regelservices gilt: Beim Regelservice darf bei Bedarf direkt mit Antikoagulantien gearbeitet werden. Daraus entsteht automatisch wieder ein 2er Folge-Job.
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

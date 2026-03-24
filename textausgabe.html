@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <title>Zusatzinfos & Textausgabe</title>
+    <style>
+        body { margin: 0; font-family: Arial, sans-serif; background: #fff; }
+        .a4-container { width: 100%; min-height: 1160px; padding: 50px; box-sizing: border-box; font-size: 10px; color: #333; }
+        .header { border-bottom: 2px solid #005A9C; padding-bottom: 10px; margin-bottom: 20px; }
+        .title { font-size: 16px; font-weight: bold; color: #005A9C; text-transform: uppercase; }
+        .text-box { background: #f9f9f9; border: 1px solid #ccc; padding: 15px; margin-bottom: 20px; font-family: monospace; white-space: pre-wrap; line-height: 1.4; }
+        .sub-title { font-weight: bold; margin-bottom: 5px; font-size: 12px; color: #000; }
+    </style>
+</head>
+<body>
+    <div class="a4-container">
+        <div class="header">
+            <div class="title">Zusatzinfos & Textbaustein-Ausgabe (Klartext-Anhang)</div>
+        </div>
+
+        <div class="sub-title">1. Generierter E-Mail-Entwurf (Kundenkommunikation)</div>
+        <div class="text-box" id="output-email">Warten auf Synchronisation aus dem Textgenerator...</div>
+
+        <div class="sub-title">2. Interne Gesprächsnotizen (Rohtext / Sales Funnel)</div>
+        <div class="text-box" id="output-notes">Warten auf Synchronisation aus dem Dashboard...</div>
+
+        <div class="sub-title">3. Verwendete UNLOCK PHRASES & KMB-Links</div>
+        <div class="text-box" id="output-phrases">Auflistung aller aktivierten Textbausteine...</div>
+    </div>
+</body>
+</html>

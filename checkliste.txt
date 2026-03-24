@@ -1,0 +1,46 @@
+pber text gehen infos als sprechblase
+strahl design
+
+1. index.html (Header & Navigation)
+Problem: Bearbeiter-Feld ist im falschen Bereich (schwarz statt weiß); der schwarze Block ist nach dem Verschieben ungenutzt; Navigationstasten für Deckblätter fehlen.
+To-Do: Bearbeiter und Personalnummer in den oberen weißen Bereich verschieben. Im schwarzen Bereich eine Anzeige für den Job-/Auftragsbetrag (Live-Kalkulation) einbauen. Oben einen kleinen, roten, viereckigen Button mit "1" (für Deckblatt Start) und einen weiteren roten Button für das Abschluss-Deckblatt (mit finaler Seitenzahl) hinzufügen.
+2. index.html (Rechte Spalte / Dashboard)
+Problem: Die besprochene Provisions-Ampel fehlt noch im Layout.
+To-Do: Eine dezente Provisions-Ampel (8%, 6%, 9% Logik) im unteren rechten Bereich, direkt über dem Footer, integrieren.
+3. index.html / info_modul.js (Info-Strahl / Scanner)
+Problem: Der Strahl hat aktuell nur ein starres Verhalten und reagiert nur auf die grobe Seitenmitte.
+To-Do: Zwei verschiedene Modi einbauen: 1. Kontext-Modus (beschreibt allgemein den Überschriftenbereich/die aktuelle Sektion). 2. Trigger-Modus (reagiert punktgenau auf bestimmte Keywords/Formularfelder mit spezifischen Erklärungen).
+4. sv_seite_1.html & sv_seite_2.html
+Problem: Optik stimmt nicht mit dem Original überein (gestaucht, fehlende Ränder, Layout-Abweichungen).
+To-Do: Beide Seiten einer strikten optischen Überarbeitung unterziehen, sodass sie 1:1 dem originalen A4-Druckbild entsprechen.
+5. kalkulation.html
+Problem: Das Dokument ist optisch und inhaltlich falsch aufgebaut. Der dynamische Intervall-Zeitstrahl gehört hier nicht hin.
+To-Do: Intervall-Zeitstrahl entfernen. Das Dokument in einem völlig eigenen Arbeitsschritt 1:1 exakt nach der originalen Vorlage für die Kalkulation neu aufbauen.
+6. kalkulations_tool.html (Backoffice Matrix)
+Problem: Formular ist total unvollständig, Stationen fehlen, falscher Detailgrad im Vergleich zur Masterkalkulation.
+To-Do: Den dynamischen Intervall-Zeitstrahl hier integrieren. Das Dokument massiv erweitern und exakt an Ihre Masterkalkulation (inklusive aller Eingaben für Stationen) anpassen.
+7. ipc.html (inkl. CEPA Risikobeurteilung)
+Problem: Farbgebung falsch (blaue Überschrift), Layout weicht vom Original ab.
+To-Do: Blaue Überschriften entfernen. IPC und CEPA exakt 1:1 nach der offiziellen Originalvorgabe aufbauen. Keine Abweichungen zulassen.
+8. protokoll.html (Mängelbericht / Situation vor Ort)
+Problem: Protokoll ist isoliert. Querverweise aus der Servicevereinbarung lassen sich nicht synchron auf beiden Seiten bedienen.
+To-Do: Das Protokoll eigenständig aufbauen, aber alle entsprechenden Checkboxen/Felder aus der SV hier spiegeln, sodass Eingaben bidirektional (auf beiden Seiten) funktionieren.
+9. textgenerator.html
+Problem: Wenn mehrere Text-Kategorien geöffnet werden, sprengt die Liste den A4-Seitenbereich (staucht/läuft über).
+To-Do: Eine Akkordeon-Regel definieren: Es darf immer nur maximal ein Tab (eine Kategorie) geöffnet sein. Klickt man eine neue an, schließt sich die vorherige automatisch.
+10. textbausteine.html (Fehlende Seite)
+Problem: Die in der Navigation vorgesehene Seite zwischen "Textgenerator" und "Kalkulationsgrundlage" existiert physisch noch nicht.
+To-Do: Die HTML-Datei anlegen, das A4-Grundgerüst einfügen und in die lückenlose Scroll-Wand der index.html einbinden.
+11. Bisherige System- & API-Aufgaben (Offen aus Vorverlauf)
+Problem 1 (Visuelle Dokumentation): Die Seite für die Bild-Uploads und Situationsfotos fehlt noch. -> To-Do: Upload-Seite aufbauen.
+Problem 2 (Auftrag abgeben): Der API-Button öffnet nur Google Forms, übergibt aber keine Live-Daten. -> To-Do: Parameter (Personalnummer, Betrag, etc.) an die URL anhängen.
+Problem 3 (Popups): Bestätigungs-Meldungen fehlen bei lokalen Aktionen. -> To-Do: Globale Google-Style "Erfolg"-Popups für Druck und Backup einbauen.
+
+
+
+meine kuendigung.html ist weg. hier war der kündigungskalkulator hinterlegt. erstelle die seite neu
+
+im header auch links zu kalkulationsseiten admin tool etc. wo sind diese?
+
+zeitstahl kalender für jobs, verträge, maßnahmen etc,
+
